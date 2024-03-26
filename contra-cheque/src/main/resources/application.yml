@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: contra-cheque
+
+info:
+  project:
+    application: ${spring.application.name}
+    version: @project.version@
+    javaVendor: ${java.runtime.name}
+    javaVersion: ${java.runtime.version}
+
+
+
