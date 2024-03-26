@@ -1,0 +1,14 @@
+version: "1"
+
+services:
+
+  contra-cheque-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contra-cheque-api
+    ports:
+      - "80:80"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SERVER_PORT: 80
