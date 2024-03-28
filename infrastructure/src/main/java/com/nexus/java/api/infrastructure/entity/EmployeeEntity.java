@@ -22,6 +22,7 @@ public class EmployeeEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(unique = true)
     private String id;
 
     @Column(

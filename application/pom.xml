@@ -43,6 +43,16 @@
             <artifactId>nexus.java.lib.aws</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.igorcampos-dev</groupId>
+            <artifactId>nexus.java.lib.validations</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.igorcampos-dev</groupId>
+            <artifactId>nexus.java.lib.utils</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
