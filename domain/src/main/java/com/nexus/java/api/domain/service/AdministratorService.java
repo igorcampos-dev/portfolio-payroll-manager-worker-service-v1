@@ -1,10 +1,8 @@
 package com.nexus.java.api.domain.service;
 
-
 import com.nexus.java.api.domain.dto.AdministratorToDomain;
-import com.nexus.java.api.domain.dto.domain.LoginDomain;
+import com.nexus.java.api.domain.dto.domain.LoginAdministratorDomain;
 
 public interface AdministratorService {
-
-    LoginDomain login(AdministratorToDomain administratorToDomain);
+    LoginAdministratorDomain login(AdministratorToDomain administratorToDomain);
 }

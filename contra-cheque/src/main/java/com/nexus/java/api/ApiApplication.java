@@ -3,7 +3,7 @@ package com.nexus.java.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.nexus")
 public class ApiApplication {
 
 	public static void main(String[] args) {

@@ -1,14 +1,17 @@
 server:
-  port: ${SERVER_PORT:8089}
+  port: ${SERVER_PORT:8081}
 
 spring:
+
   application:
     name: contra-cheque
+
   security:
     auth:
-      signature: ${SIGNATURE:TESTE}
+      signature: TESTE
+
   datasource:
-    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/locale?allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/hml?allowPublicKeyRetrieval=true
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:KBf9]xEjq~K}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,3 +21,13 @@ spring:
           dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate:
         ddl-auto: update
+
+    #info:
+    #project:
+    #application: ${spring.application.name}
+    #version: @project.version@
+    #javaVendor: ${java.runtime.name}
+    #javaVersion: ${java.runtime.version}
+
+
+

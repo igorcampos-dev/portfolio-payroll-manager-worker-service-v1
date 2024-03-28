@@ -1,5 +1,11 @@
 version: "1"
 
+networks:
+  api:
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
 services:
 
   contra-cheque-api:
@@ -10,5 +16,24 @@ services:
     ports:
       - "80:80"
     environment:
+      DB_SERVER: database
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: KBf9]xEjq~K
       SPRING_PROFILES_ACTIVE: dev
       SERVER_PORT: 80
+    networks:
+      - api
+
+  database:
+    container_name: database
+    image: bitnami/mysql:8.0.26-debian-10-r60
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: KBf9]xEjq~K
+      MYSQL_ROOT_USER: root
+    volumes:
+      - ./contra-cheque/src/main/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - api

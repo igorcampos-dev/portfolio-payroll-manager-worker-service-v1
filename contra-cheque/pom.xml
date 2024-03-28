@@ -51,6 +51,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.igorcampos-dev</groupId>
+            <artifactId>nexus.java.lib.security</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.database-rider</groupId>
             <artifactId>rider-junit5</artifactId>
             <version>1.39.0</version>

@@ -39,8 +39,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr353</artifactId>
+            <groupId>com.github.igorcampos-dev</groupId>
+            <artifactId>nexus.java.lib.aws</artifactId>
         </dependency>
 
     </dependencies>
