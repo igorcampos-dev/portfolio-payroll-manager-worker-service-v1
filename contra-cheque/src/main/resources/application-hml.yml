@@ -22,12 +22,19 @@ spring:
       hibernate:
         ddl-auto: update
 
-    #info:
-    #project:
-    #application: ${spring.application.name}
-    #version: @project.version@
-    #javaVendor: ${java.runtime.name}
-    #javaVersion: ${java.runtime.version}
+  aws:
+    credentials:
+      serviceEndpoint: ${AWS_ENDPOINT:http://0.0.0.0:3000}
+      accessKey: ${AWS_ACESS_KEY:S3RVER}
+      secretKey: ${AWS_SECRET_KEY:S3RVER}
+      region: ${AWS_REGION:us-east-1}
+      bucketName: ${AWS_BUCKETNAME:funcionarios}
+
+enterprise:
+  credential:
+    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/principal?allowPublicKeyRetrieval=true
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:KBf9]xEjq~K}
 
 
 

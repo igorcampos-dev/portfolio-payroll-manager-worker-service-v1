@@ -1,10 +1,10 @@
 package com.nexus.java.api.domain.service;
 
-import com.nexus.java.api.domain.dto.LoginEmployeeToDomain;
-import com.nexus.java.api.domain.dto.RegisterEmployeeToDomain;
-import com.nexus.java.api.domain.dto.domain.LoginEmployeeDomain;
+import com.nexus.java.api.domain.mapper.application.LoginEmployee;
+import com.nexus.java.api.domain.model.LoginEmployeeModel;
+import com.nexus.java.api.domain.model.RegisterEmployeeModel;
 
 public interface EmployeeService {
-    LoginEmployeeDomain login(LoginEmployeeToDomain loginEmployeeDomain);
-    void register(RegisterEmployeeToDomain registerEmployeeToDomain);
+    LoginEmployee login(LoginEmployeeModel loginEmployeeModelDomain);
+    void register(RegisterEmployeeModel registerEmployeeModel);
 }

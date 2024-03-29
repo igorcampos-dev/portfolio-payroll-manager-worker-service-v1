@@ -4,7 +4,7 @@ import com.nexus.java.api.application.dto.request.LoginEmployeeDto;
 import com.nexus.java.api.application.dto.request.RegisterEmployeeDto;
 import com.nexus.java.api.application.dto.response.LoginEmployeeResponse;
 import com.nexus.java.api.application.dto.response.ResponseGeneric;
-import com.nexus.java.api.application.mapper.EmployeeMapper;
+import com.nexus.java.api.application.mapper.Mapper;
 import com.nexus.java.api.application.utils.Path;
 import com.nexus.java.api.domain.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -23,18 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 public final class AuthEmployeeController {
 
     private final EmployeeService employeeService;
-    private final EmployeeMapper employeeMapper;
 
     @PostMapping(path = "/login")
     private ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
-        var operation = employeeService.login(employeeMapper.employeeToDomain(loginEmployeeDto));
-        var response = employeeMapper.employeeToResponse(operation);
+        var operation = employeeService.login(loginEmployeeDto.toDomain());
+        var response = Mapper.convert(operation, LoginEmployeeResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping(path = "/validate")
     private ResponseEntity<?> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
-        this.employeeService.register(employeeMapper.registerEmployeeToDomain(registerEmployeeDto));
+        this.employeeService.register(registerEmployeeDto.toDomain());
         return ResponseGeneric.response(HttpStatus.CREATED, "Usuário criado com sucesso");
     }
 

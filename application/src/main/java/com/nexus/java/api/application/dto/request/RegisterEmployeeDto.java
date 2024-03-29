@@ -1,5 +1,7 @@
 package com.nexus.java.api.application.dto.request;
 
+import com.nexus.java.api.application.mapper.Mapper;
+import com.nexus.java.api.domain.model.RegisterEmployeeModel;
 import com.nexus.utils.Utils;
 import com.nexus.validations.NonNullOrBlank;
 import com.nexus.validations.ValidPassword;
@@ -24,5 +26,9 @@ public class RegisterEmployeeDto {
 
     public String getCpf() {
         return Utils.formatCPF(cpf);
+    }
+
+    public RegisterEmployeeModel toDomain(){
+        return Mapper.convert(this, RegisterEmployeeModel.class);
     }
 }

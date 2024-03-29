@@ -37,3 +37,14 @@ services:
       - ./contra-cheque/src/main/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - api
+
+  aws-s3rver:
+    networks:
+      api:
+        ipv4_address: 172.18.0.22
+    container_name: aws-s3rver
+    build:
+      context: ./contra-cheque/src/main/docker/bucket
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
