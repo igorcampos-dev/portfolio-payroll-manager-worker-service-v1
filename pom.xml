@@ -40,6 +40,7 @@
         <nexus.java.lib.validations>-e8395ac93a-1</nexus.java.lib.validations>
         <nexus.java.lib.utils>master-b9b8acf909-1</nexus.java.lib.utils>
         <nexus.java.lib.aws>main-b3f64280d5-1</nexus.java.lib.aws>
+        <h2.version>2.2.224</h2.version>
     </properties>
 
     <dependencyManagement>
@@ -141,6 +142,12 @@
                 <groupId>com.github.igorcampos-dev</groupId>
                 <artifactId>nexus.java.lib.utils</artifactId>
                 <version>${nexus.java.lib.utils}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
 
         </dependencies>

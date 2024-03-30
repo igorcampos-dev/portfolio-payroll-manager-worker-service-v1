@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = Path.PATH_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
-public final class AuthEmployeeController {
+public final class AuthenticationEmployeeController {
 
     private final EmployeeService employeeService;
 
