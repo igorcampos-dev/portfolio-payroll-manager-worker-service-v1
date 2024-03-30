@@ -78,6 +78,14 @@ Todos os Curls declarados no Readme são do ambiente de dev, certifique-se de mu
 
 ---
 
+## Portas do projeto:
+   - **docker:** 80
+   - **local:** 8087
+   - **dev:** 80
+   - **hml:** 8081
+   - **prd:** 8083
+---
+
 ## Rotas para Funcionários
 
 ---
