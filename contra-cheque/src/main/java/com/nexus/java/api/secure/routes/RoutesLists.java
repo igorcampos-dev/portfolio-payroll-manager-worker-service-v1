@@ -8,10 +8,10 @@ public class RoutesLists {
 
     public static List<Routes> getHasRoleAdminRoutes(){
         return List.of(
-                new Routes("/nexus/admins/employees", HttpMethod.GET),
-                new Routes("/nexus/admins/{userId}/{paycheckDate}", HttpMethod.DELETE),
-                new Routes("/nexus/admins/{userId}/{paycheckDate}", HttpMethod.POST),
-                new Routes("/nexus/admins/{userId}/{paycheckDate}", HttpMethod.PUT)
+                new Routes("/nexus/admin/employees", HttpMethod.GET),
+                new Routes("/nexus/admin/{userId}/{paycheckDate}", HttpMethod.DELETE),
+                new Routes("/nexus/admin/{userId}/{paycheckDate}", HttpMethod.POST),
+                new Routes("/nexus/admin/{userId}/{paycheckDate}", HttpMethod.PUT)
         );
     }
 
@@ -24,7 +24,7 @@ public class RoutesLists {
                 new Routes("/swagger-ui.html", HttpMethod.GET),
                 new Routes("/nexus/employees/login", HttpMethod.POST),
                 new Routes("/nexus/employees/validate", HttpMethod.POST),
-                new Routes("/nexus/login/admin", HttpMethod.POST)
+                new Routes("/nexus/admin/login", HttpMethod.POST)
                 );
     }
 

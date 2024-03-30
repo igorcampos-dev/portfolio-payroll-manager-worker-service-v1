@@ -1,6 +1,6 @@
 package com.nexus.java.api.domain.service.impl;
 
-import com.nexus.java.api.domain.exception.UserNotAdminException;
+import com.nexus.java.api.domain.exception.EmployeeNotAdminException;
 import com.nexus.java.api.domain.mapper.application.LoginAdministrator;
 import com.nexus.java.api.domain.mapper.infrastructure.Employee;
 import com.nexus.java.api.domain.mapper.infrastructure.enums.UserRole;
@@ -23,7 +23,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     public LoginAdministrator login(LoginAdministratorModel loginAdministratorModel) {
         Employee employee = administratorPersistence.findByCpf(loginAdministratorModel.getCpf());
         boolean condition = employee.getRole() != UserRole.ADMIN;
-        Objects.throwIfTrue(condition, USER_NOT_ADMIN_EXCEPTION);
+        Objects.throwIfTrue(condition, EMPLOYEE_NOT_ADMIN_EXCEPTION);
 
         return LoginAdministrator.builder()
                 .name(employee.getName())
@@ -32,5 +32,5 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
 
-    private static final UserNotAdminException USER_NOT_ADMIN_EXCEPTION = new UserNotAdminException("O funcionário não é um administrador");
+    private static final EmployeeNotAdminException EMPLOYEE_NOT_ADMIN_EXCEPTION = new EmployeeNotAdminException("O funcionário não é um administrador");
 }

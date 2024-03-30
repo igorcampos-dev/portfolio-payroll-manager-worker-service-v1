@@ -1,9 +1,15 @@
 package com.nexus.java.api.secure.exception.global;
-/*
+
 import com.nexus.aws.exception.FileAlreadyExistsException;
 import com.nexus.aws.exception.FileNotExists;
 import com.nexus.aws.exception.FolderEmptyException;
-import com.nexus.contracheque.exception.*;
+import com.nexus.java.api.domain.exception.EmployeeNotAdminException;
+import com.nexus.java.api.domain.exception.InvalidContentTypeException;
+import com.nexus.java.api.domain.exception.InvalidPaycheckDateException;
+import com.nexus.java.api.infrastructure.exceptions.EmployeeAlreadyException;
+import com.nexus.java.api.infrastructure.exceptions.EmployeeNotFoundException;
+import com.nexus.java.api.infrastructure.exceptions.EmptyEmployeeListException;
+import com.nexus.java.api.secure.exception.Error;
 import com.nexus.validations.exceptions.LargePasswordException;
 import com.nexus.validations.exceptions.SmallPasswordException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,11 +22,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.Instant;
 
- */
 
-//@RestControllerAdvice
+
+@RestControllerAdvice
 public class CustomExceptionHandler {
-    /*
+
 
     private final Instant instant = Instant.now();
 
@@ -111,6 +117,6 @@ public class CustomExceptionHandler {
         return this.response(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR, s.getRequestURI());
     }
 
-     */
+
 
 }

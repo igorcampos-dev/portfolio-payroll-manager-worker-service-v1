@@ -1,5 +1,6 @@
 package com.nexus.java.api.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nexus.java.api.infrastructure.entity.enums.Profession;
 import com.nexus.java.api.infrastructure.entity.enums.UserRole;
 import jakarta.persistence.*;
@@ -80,37 +81,44 @@ public class EmployeeEntity implements UserDetails {
     @Comment("Senha do funcionário")
     private String password;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return cpf;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;

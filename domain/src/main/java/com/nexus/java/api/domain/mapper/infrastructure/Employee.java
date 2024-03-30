@@ -1,5 +1,6 @@
 package com.nexus.java.api.domain.mapper.infrastructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nexus.java.api.domain.mapper.infrastructure.enums.Profession;
 import com.nexus.java.api.domain.mapper.infrastructure.enums.UserRole;
 import lombok.AllArgsConstructor;
@@ -24,12 +25,14 @@ public class Employee implements UserDetails {
     private Integer code;
     private String password;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return password;
@@ -40,21 +43,25 @@ public class Employee implements UserDetails {
         return cpf;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;

@@ -265,7 +265,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 ### `POST /nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location 'http://localhost:8087/nexus/admins/USER_ID/DATA' \
+curl --location 'http://localhost:8087/nexus/admin/USER_ID/DATA' \
 --header 'Authorization: Bearer TOKEN_AQUI' \
 --form 'file=@"CAMINHO_DO_ARQUIVO"'
 ```
@@ -297,8 +297,8 @@ Nesta rota, o arquivo do contra cheque é enviado como um multipartFile para o f
 ### `GET /nexus/admin/employees`
 
 ```bash
-curl --location 'http://localhost:8087/nexus/admins/employees' \
---header 'Authorization: Bearer TOKEN_BEARER_DO_ADMIN'
+curl --location 'http://localhost:8087/nexus/admin/employees' \
+--header 'Authorization: Bearer SEU_TOKEN_AQUI'
 ```
 
 Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno incluirá o ID, nome do funcionário e profissão.
@@ -338,7 +338,7 @@ Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno
 ### `PUT /nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location --request PUT 'http://localhost:8087/nexus/admins/ID_DO_USUARIO/DATA_CONTRACHEQUE' \
+curl --location --request PUT 'http://localhost:8087/nexus/admin/ID_DO_USUARIO/DATA_CONTRACHEQUE' \
 --header 'Authorization: Bearer TOKEN_BEARER AQUI' \
 --form 'DIRETORIO_DO_ARQUIVO'
 ```
@@ -367,7 +367,7 @@ Com base nessas informações, o contra cheque especificado é atualizado.
 ### `DELETE /nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location --request DELETE 'http://localhost:8087/nexus/admins/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \
+curl --location --request DELETE 'http://localhost:8087/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \
 --header 'Authorization: Bearer TOKEN_BEARER_ADMIN'
 ```
 

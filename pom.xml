@@ -34,7 +34,7 @@
         <lombok.version>1.18.28</lombok.version>
         <jacoco.version>0.8.10</jacoco.version>
         <model.mapper.version>3.2.0</model.mapper.version>
-        <mysql.connector.version>8.3.0</mysql.connector.version>
+        <com.mysql.version>8.0.33</com.mysql.version>
         <spring.web.version>6.1.5</spring.web.version>
         <nexus.java.lib.security>master-350901246c-1</nexus.java.lib.security>
         <nexus.java.lib.validations>-e8395ac93a-1</nexus.java.lib.validations>
@@ -114,9 +114,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.mysql</groupId>
-                <artifactId>mysql-connector-j</artifactId>
-                <version>${mysql.connector.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${com.mysql.version}</version>
             </dependency>
 
             <dependency>

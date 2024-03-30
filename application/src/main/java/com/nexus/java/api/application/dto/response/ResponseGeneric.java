@@ -6,12 +6,18 @@ import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Map;
+
 public class ResponseGeneric {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @SneakyThrows(JsonProcessingException.class)
-    public static ResponseEntity<?> response(HttpStatus httpStatus, Object responseParam){
-        return ResponseEntity.status(httpStatus).body(OBJECT_MAPPER.writeValueAsString(responseParam));
+    public static ResponseEntity<?> response(HttpStatus httpStatus, Object responseParam) {
+        return ResponseEntity.status(httpStatus).body(
+                OBJECT_MAPPER.writeValueAsString(
+                        Map.of("message", responseParam)
+                )
+        );
     }
 }
