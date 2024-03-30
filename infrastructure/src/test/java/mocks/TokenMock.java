@@ -1,4 +1,4 @@
-package com.nexus.contracheque.mocks;
+package mocks;
 
 public class TokenMock {
 

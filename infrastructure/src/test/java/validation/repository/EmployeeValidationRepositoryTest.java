@@ -1,15 +1,14 @@
-package com.nexus.contracheque.validations;
+package validation.repository;
 
-import com.nexus.contracheque.exception.EmptyEmployeeListException;
-import com.nexus.contracheque.model.dto.AllEmployeesDTO;
-import com.nexus.contracheque.validation.impl.EmployeeDataIntegrityServiceImpl;
-import com.nexus.contracheque.database.mysql.repository.EmployeeRepository;
-import com.nexus.contracheque.exception.EmployeeAlreadyException;
-import com.nexus.contracheque.exception.EmployeeNotFoundException;
-import com.nexus.contracheque.mocks.EmployeeMock;
-import com.nexus.contracheque.model.entity.Employee;
-import com.nexus.contracheque.model.entity.enums.Profession;
-import com.nexus.contracheque.model.entity.enums.UserRole;
+import com.nexus.java.api.infrastructure.entity.EmployeeEntity;
+import com.nexus.java.api.infrastructure.entity.enums.Profession;
+import com.nexus.java.api.infrastructure.entity.enums.UserRole;
+import com.nexus.java.api.infrastructure.exceptions.EmployeeAlreadyException;
+import com.nexus.java.api.infrastructure.exceptions.EmployeeNotFoundException;
+import com.nexus.java.api.infrastructure.exceptions.EmptyEmployeeListException;
+import com.nexus.java.api.infrastructure.repository.EmployeeRepository;
+import com.nexus.java.api.infrastructure.validation.repository.impl.EmployeeValidationRepositoryImpl;
+import mocks.EmployeeMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,10 +23,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeDataIntegrityServiceTest {
+public class EmployeeValidationRepositoryTest {
 
     @InjectMocks
-    EmployeeDataIntegrityServiceImpl employeeOperations;
+    EmployeeValidationRepositoryImpl employeeOperations;
 
     @Mock
     EmployeeRepository employeeRepository;
@@ -72,7 +70,7 @@ public class EmployeeDataIntegrityServiceTest {
 
         when(employeeRepository.findByCpf(anyString())).thenReturn(Optional.of(EmployeeMock.get()));
 
-        Employee employee = employeeOperations.findByCpf("678.793.790-37");
+        EmployeeEntity employee = employeeOperations.findByCpf("678.793.790-37");
 
         assertEquals("Joao", employee.getName());
         assertEquals(123, employee.getCode());
@@ -92,7 +90,7 @@ public class EmployeeDataIntegrityServiceTest {
     @Test
     void TestSave(){
         employeeOperations.save(EmployeeMock.get());
-        verify(employeeRepository, times(1)).save(any(Employee.class));
+        verify(employeeRepository, times(1)).save(any(EmployeeEntity.class));
     }
 
     @Test
@@ -122,24 +120,24 @@ public class EmployeeDataIntegrityServiceTest {
                 EmployeeMock.get()
         ));
 
-        List<AllEmployeesDTO> result = employeeOperations.findAllUsersWithBasicInfo();
+        List<EmployeeEntity> result = employeeOperations.findAllUsersWithBasicInfo();
 
         assertNotNull(result);
         assertEquals(1, result.size());
 
-        AllEmployeesDTO firstDTO = result.get(0);
-        assertEquals("d5c40e61-e91f-45a1-97b7-3925a9f28b78", firstDTO.id());
-        assertEquals("Joao", firstDTO.name());
-        assertEquals(Profession.ATENDENTE_DE_BALCAO.toString(), String.valueOf(firstDTO.profession()));
+        EmployeeEntity firstDTO = result.get(0);
+        assertEquals("d5c40e61-e91f-45a1-97b7-3925a9f28b78", firstDTO.getId());
+        assertEquals("Joao", firstDTO.getName());
+        assertEquals(Profession.ATENDENTE_DE_BALCAO.toString(), String.valueOf(firstDTO.getProfession()));
     }
 
     @Test
     void testFindById(){
         when(employeeRepository.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(Optional.of(EmployeeMock.get()));
 
-        Employee employee = employeeOperations.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
+        EmployeeEntity employee = employeeOperations.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
 
-        Employee employeeMock = EmployeeMock.get();
+        EmployeeEntity employeeMock = EmployeeMock.get();
 
         assertEquals(employeeMock.getName(), employee.getName());
         assertEquals(employeeMock.getCode(), employee.getCode());

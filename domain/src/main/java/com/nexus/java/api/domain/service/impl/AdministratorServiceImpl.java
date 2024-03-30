@@ -31,6 +31,5 @@ public class AdministratorServiceImpl implements AdministratorService {
                 .build();
     }
 
-
     private static final EmployeeNotAdminException EMPLOYEE_NOT_ADMIN_EXCEPTION = new EmployeeNotAdminException("O funcionário não é um administrador");
 }

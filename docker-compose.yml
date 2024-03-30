@@ -16,12 +16,16 @@ services:
     ports:
       - "80:80"
     environment:
-      DB_SERVER: database
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: KBf9]xEjq~K
       SPRING_PROFILES_ACTIVE: dev
-      SERVER_PORT: 80
+      DB_PORT: 3306
+      DB_SERVER: database
+      DB_PASSWORD: KBf9]xEjq~K
+      DB_USER: root
+      AWS_ENDPOINT: http://172.18.0.22:3000
+      AWS_ACESS_KEY: S3RVER
+      AWS_SECRET_KEY: S3RVER
+      AWS_REGION: us-east-1
+      AWS_BUCKETNAME: funcionarios
     networks:
       - api
 

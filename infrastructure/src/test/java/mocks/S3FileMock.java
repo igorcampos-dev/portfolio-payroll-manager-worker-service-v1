@@ -1,4 +1,4 @@
-package com.nexus.contracheque.mocks;
+package mocks;
 
 import com.nexus.aws.model.S3File;
 

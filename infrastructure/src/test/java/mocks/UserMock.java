@@ -1,4 +1,4 @@
-package com.nexus.contracheque.mocks;
+package mocks;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

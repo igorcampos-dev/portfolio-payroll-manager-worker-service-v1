@@ -1,16 +1,16 @@
-package com.nexus.contracheque.service;
+package service;
 
 import com.nexus.aws.cloud.S3;
 import com.nexus.aws.model.S3File;
-import com.nexus.contracheque.exception.EmployeeNotFoundException;
-import com.nexus.contracheque.exception.EmptyEmployeeListException;
-import com.nexus.contracheque.exception.InvalidContentTypeException;
-import com.nexus.contracheque.exception.InvalidPaycheckDateException;
-import com.nexus.contracheque.mocks.EmployeeMock;
-import com.nexus.contracheque.mocks.S3FileMock;
-import com.nexus.contracheque.model.dto.AllEmployeesDTO;
-import com.nexus.contracheque.service.impl.PaycheckEmployeeServiceImpl;
-import com.nexus.contracheque.validation.EmployeeDataIntegrityService;
+import com.nexus.java.api.domain.exception.InvalidContentTypeException;
+import com.nexus.java.api.domain.exception.InvalidPaycheckDateException;
+import com.nexus.java.api.domain.mapper.application.AllEmployees;
+import com.nexus.java.api.domain.persistence.EmployeePersistence;
+import com.nexus.java.api.domain.service.impl.PaycheckEmployeeServiceImpl;
+import com.nexus.java.api.infrastructure.exceptions.EmployeeNotFoundException;
+import com.nexus.java.api.infrastructure.exceptions.EmptyEmployeeListException;
+import mocks.EmployeeMock;
+import mocks.S3FileMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,7 +30,7 @@ public class PaycheckEmployeeServiceTest {
     PaycheckEmployeeServiceImpl paycheckEmployeeService;
 
     @Mock
-    EmployeeDataIntegrityService employeeDataIntegrityService;
+    EmployeePersistence employeePersistence;
 
     @Mock
     S3 s3;
@@ -40,13 +39,13 @@ public class PaycheckEmployeeServiceTest {
     @Test
     void getPaychecksByUserIdTest() {
 
-        when(employeeDataIntegrityService.findById(anyString())).thenReturn(EmployeeMock.get());
+        when(employeePersistence.findById(anyString())).thenReturn(EmployeeMock.get4());
         when(s3.listObjectsInFolder("joao")).thenReturn(S3FileMock.ListS3FileMock());
         List<S3File> paychecks = paycheckEmployeeService.getPaychecksByUserId("a53cc484-8e68-40a4-8701-47cb38ad0bd6");
 
         assertNotNull(paychecks);
         assertFalse(paychecks.isEmpty());
-        verify(employeeDataIntegrityService, times(1)).findById("a53cc484-8e68-40a4-8701-47cb38ad0bd6");
+        verify(employeePersistence, times(1)).findById("a53cc484-8e68-40a4-8701-47cb38ad0bd6");
         verify(s3, times(1)).listObjectsInFolder("joao");
     }
 
@@ -54,7 +53,7 @@ public class PaycheckEmployeeServiceTest {
     void  getPaychecksByUserIdUserNotFoundExceptionTest(){
 
         doThrow(new EmployeeNotFoundException("Usuário não existe."))
-                .when(employeeDataIntegrityService).findById("a53cc484-8e68-40a4-8701-47cb38ad0bd6");
+                .when(employeePersistence).findById("a53cc484-8e68-40a4-8701-47cb38ad0bd6");
 
         assertThrows(EmployeeNotFoundException.class, () -> paycheckEmployeeService.getPaychecksByUserId("a53cc484-8e68-40a4-8701-47cb38ad0bd6"));
         verify(s3, never()).listObjectsInFolder(anyString());
@@ -70,7 +69,7 @@ public class PaycheckEmployeeServiceTest {
     @Test
     void testDeletePaycheckById_Success() {
 
-        when(employeeDataIntegrityService.findById(EmployeeMock.get().getId())).thenReturn(EmployeeMock.get());
+        when(employeePersistence.findById(EmployeeMock.get().getId())).thenReturn(EmployeeMock.get4());
 
         paycheckEmployeeService.deletePaycheckById("d5c40e61-e91f-45a1-97b7-3925a9f28b78", "01-2023");
 
@@ -80,7 +79,7 @@ public class PaycheckEmployeeServiceTest {
     @Test
     void testDeletePaycheckById_EmployeeNotFound() {
         doThrow(new EmployeeNotFoundException("Usuário não existe."))
-                .when(employeeDataIntegrityService).findById(EmployeeMock.get().getId());
+                .when(employeePersistence).findById(EmployeeMock.get().getId());
 
 
         assertThrows(EmployeeNotFoundException.class, () -> paycheckEmployeeService.deletePaycheckById(EmployeeMock.get().getId(), "01-2023"));
@@ -89,42 +88,42 @@ public class PaycheckEmployeeServiceTest {
 
     @Test
     void testFindAllUsersWithBasicInfo(){
-        when(employeeDataIntegrityService.findAllUsersWithBasicInfo()).thenReturn(EmployeeMock.list());
-       List<AllEmployeesDTO> allEmployeesDTOS = paycheckEmployeeService.findAllUsersWithBasicInfo();
+        when(employeePersistence.findAllUsersWithBasicInfo()).thenReturn(EmployeeMock.list2());
+        List<AllEmployees> allEmployeesDTOS = paycheckEmployeeService.findAllUsersWithBasicInfo();
         assertNotNull(allEmployeesDTOS);
     }
 
     @Test
     void testFindAllUsersWithBasicInfoThrow(){
-        doThrow(new EmptyEmployeeListException("Não existe usuários cadastrados")).when(employeeDataIntegrityService).findAllUsersWithBasicInfo();
+        doThrow(new EmptyEmployeeListException("Não existe usuários cadastrados")).when(employeePersistence).findAllUsersWithBasicInfo();
         assertThrows(EmptyEmployeeListException.class, () -> paycheckEmployeeService.findAllUsersWithBasicInfo());
     }
 
     @Test
     void getContentFileTestThrow(){
         assertThrows(InvalidPaycheckDateException.class, () -> paycheckEmployeeService.getContentFile("teste", "teste"));
-        verify(employeeDataIntegrityService, never()).findById(anyString());
+        verify(employeePersistence, never()).findById(anyString());
         verify(s3, never()).getFile(anyString(), anyString());
     }
 
     @Test
     void getContentFileTest(){
         String folder = EmployeeMock.get().getName().replace(" ", "-").toLowerCase().trim();
-        when(employeeDataIntegrityService.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get());
+        when(employeePersistence.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get4());
         when(s3.getFile(folder, "12-2023")).thenReturn(new byte[1]);
 
         paycheckEmployeeService.getContentFile("d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023");
 
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, times(1)).getFile(anyString(), anyString());
     }
 
     @Test
     void getContentFileTestThrow2(){
-        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeeDataIntegrityService).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
+        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeePersistence).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
 
         assertThrows(EmployeeNotFoundException.class, () -> paycheckEmployeeService.getContentFile("d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023"))  ;
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, never()).getFile(anyString(), anyString());
     }
 
@@ -133,7 +132,7 @@ public class PaycheckEmployeeServiceTest {
         MultipartFile multipartFile = new MockMultipartFile("filename", new byte[0]);
 
         assertThrows(InvalidPaycheckDateException.class, () -> paycheckEmployeeService.updateFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "23-2023"));
-        verify(employeeDataIntegrityService, never()).findById(anyString());
+        verify(employeePersistence, never()).findById(anyString());
         verify(s3, never()).updateObject(any(), anyString(), anyString());
     }
 
@@ -141,7 +140,7 @@ public class PaycheckEmployeeServiceTest {
     void updateFileThrow2(){
         MultipartFile multipartFile = new MockMultipartFile("filename", new byte[0]);
         assertThrows(InvalidContentTypeException.class, () -> paycheckEmployeeService.updateFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023"));
-        verify(employeeDataIntegrityService, never()).findById(anyString());
+        verify(employeePersistence, never()).findById(anyString());
         verify(s3, never()).updateObject(any(), anyString(), anyString());
     }
 
@@ -149,10 +148,10 @@ public class PaycheckEmployeeServiceTest {
     void updateFileTrhow3(){
         MultipartFile multipartFile = new MockMultipartFile("filename", "filename", "application/pdf", new byte[0]);
 
-        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeeDataIntegrityService).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
+        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeePersistence).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
 
         assertThrows(EmployeeNotFoundException.class, () -> paycheckEmployeeService.updateFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023"))  ;
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, never()).updateObject(any(), anyString(), anyString());
     }
 
@@ -160,11 +159,11 @@ public class PaycheckEmployeeServiceTest {
     void updateFile(){
         MultipartFile multipartFile = new MockMultipartFile("filename", "filename", "application/pdf", new byte[0]);
 
-        when(employeeDataIntegrityService.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get());
+        when(employeePersistence.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get4());
 
         paycheckEmployeeService.updateFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023" );
 
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, times(1)).updateObject(any(), anyString(), anyString());
     }
 
@@ -173,7 +172,7 @@ public class PaycheckEmployeeServiceTest {
         MultipartFile multipartFile = new MockMultipartFile("filename", "filename", "application/pdf", new byte[0]);
 
         assertThrows(InvalidPaycheckDateException.class, () -> paycheckEmployeeService.putFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "23-2023"));
-        verify(employeeDataIntegrityService, never()).findById(anyString());
+        verify(employeePersistence, never()).findById(anyString());
         verify(s3, never()).putObject(any(), anyString(), anyString());
     }
 
@@ -181,7 +180,7 @@ public class PaycheckEmployeeServiceTest {
     void putFileThrow2(){
         MultipartFile multipartFile = new MockMultipartFile("filename", new byte[0]);
         assertThrows(InvalidContentTypeException.class, () -> paycheckEmployeeService.putFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023"));
-        verify(employeeDataIntegrityService, never()).findById(anyString());
+        verify(employeePersistence, never()).findById(anyString());
         verify(s3, never()).putObject(any(), anyString(), anyString());
     }
 
@@ -189,10 +188,10 @@ public class PaycheckEmployeeServiceTest {
     void putFileTrhow3(){
         MultipartFile multipartFile = new MockMultipartFile("filename", "filename", "application/pdf", new byte[0]);
 
-        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeeDataIntegrityService).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
+        doThrow(new EmployeeNotFoundException("Usuário não existe.")).when(employeePersistence).findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78");
 
         assertThrows(EmployeeNotFoundException.class, () -> paycheckEmployeeService.putFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023"))  ;
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, never()).putObject(any(), anyString(), anyString());
     }
 
@@ -200,18 +199,11 @@ public class PaycheckEmployeeServiceTest {
     void putFile(){
         MultipartFile multipartFile = new MockMultipartFile("filename", "filename", "application/pdf", new byte[0]);
 
-        when(employeeDataIntegrityService.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get());
+        when(employeePersistence.findById("d5c40e61-e91f-45a1-97b7-3925a9f28b78")).thenReturn(EmployeeMock.get4());
 
         paycheckEmployeeService.putFile(multipartFile, "d5c40e61-e91f-45a1-97b7-3925a9f28b78", "12-2023" );
 
-        verify(employeeDataIntegrityService, times(1)).findById(anyString());
+        verify(employeePersistence, times(1)).findById(anyString());
         verify(s3, times(1)).putObject(any(), anyString(), anyString());
     }
-
-
-
-
-
-
-
 }
