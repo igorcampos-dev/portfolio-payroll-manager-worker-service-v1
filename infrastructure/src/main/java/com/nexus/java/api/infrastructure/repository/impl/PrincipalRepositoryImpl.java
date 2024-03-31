@@ -8,7 +8,6 @@ import com.nexus.java.api.infrastructure.exceptions.SQLNexusException;
 import com.nexus.java.api.infrastructure.repository.PrincipalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

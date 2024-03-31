@@ -1,7 +1,6 @@
 package com.nexus.java.api.application.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.ArrayList;
 import java.util.List;
 

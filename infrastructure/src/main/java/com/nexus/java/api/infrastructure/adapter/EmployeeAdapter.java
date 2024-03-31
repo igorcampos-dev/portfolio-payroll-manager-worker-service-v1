@@ -10,7 +10,6 @@ import com.nexus.java.api.infrastructure.repository.PrincipalRepository;
 import com.nexus.java.api.infrastructure.validation.repository.EmployeeValidationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

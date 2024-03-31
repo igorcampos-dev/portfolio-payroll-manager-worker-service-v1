@@ -18,7 +18,6 @@ public class Run implements CommandLineRunner {
 
     private final EmployeeRepository employeeRepository;
     private final S3 s3;
-
     private static final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Override

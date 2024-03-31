@@ -8,7 +8,6 @@ import com.nexus.java.api.infrastructure.entity.EmployeeEntity;
 import com.nexus.java.api.infrastructure.entity.enums.Profession;
 import com.nexus.java.api.infrastructure.entity.enums.UserRole;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

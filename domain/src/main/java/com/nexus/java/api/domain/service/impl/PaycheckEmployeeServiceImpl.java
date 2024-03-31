@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,7 +24,6 @@ public class PaycheckEmployeeServiceImpl implements PaycheckEmployeeService {
 
     private static final String REGEX = "^(0[1-9]|1[0-2])-(19|20)\\d{2}$";
     private static final Pattern PATTERN = Pattern.compile(REGEX);
-
     private final EmployeePersistence employeePersistence;
     private final S3 s3Uploader;
 
