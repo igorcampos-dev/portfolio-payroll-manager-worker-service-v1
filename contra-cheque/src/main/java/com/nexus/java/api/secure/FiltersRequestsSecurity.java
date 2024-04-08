@@ -1,6 +1,6 @@
 package com.nexus.java.api.secure;
 
-import com.nexus.java.api.secure.routes.RoutesLists;
+import com.nexus.java.api.application.util.Path;
 import com.nexus.security.service.filter.FilterService;
 import com.nexus.security.service.filter.SecurityContextInjector;
 import com.nexus.security.service.routes.RoutesService;
@@ -27,9 +27,9 @@ public class FiltersRequestsSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, SecurityContextInjector securityContextInjector) throws Exception {
        return RoutesService.builder()
                .http(httpSecurity)
-               .getPermitHasRoleUser(RoutesLists.getHasRoleUserRoutes())
-               .permitAllRoutes(RoutesLists.getPermitAllRoutes())
-               .permitHasRoleAdmin(RoutesLists.getHasRoleAdminRoutes())
+               .getPermitHasRoleUser(Path.getHasRoleUserRoutes())
+               .permitAllRoutes(Path.getPermitAllRoutes())
+               .permitHasRoleAdmin(Path.getHasRoleAdminRoutes())
                .filterService(new FilterService(securityContextInjector))
                .build().configure();
     }

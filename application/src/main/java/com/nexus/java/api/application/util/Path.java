@@ -1,11 +1,11 @@
-package com.nexus.java.api.secure.routes;
+package com.nexus.java.api.application.util;
 
 import com.nexus.security.dto.Routes;
 import org.springframework.http.HttpMethod;
+
 import java.util.List;
 
-public class RoutesLists {
-
+public class Path {
     public static final String DOMAIN = "/nexus";
     public static final String GET_EMPLOYEES = "/admin/employees";
     public static final String DELETE_ADMIN = "/admin/{userId}/{paycheckDate}";
@@ -54,7 +54,7 @@ public class RoutesLists {
                 new Routes(FINAL_POST_LOGIN_EMPLOYEE, HttpMethod.POST),
                 new Routes(FINAL_POST_VALIDATE_EMPLOYEE, HttpMethod.POST),
                 new Routes(FINAL_POST_VALIDATE_ADMIN, HttpMethod.POST)
-                );
+        );
     }
 
     public static List<Routes> getHasRoleUserRoutes(){

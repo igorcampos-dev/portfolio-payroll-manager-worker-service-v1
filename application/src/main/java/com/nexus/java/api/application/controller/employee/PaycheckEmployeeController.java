@@ -1,7 +1,7 @@
 package com.nexus.java.api.application.controller.employee;
 
 import com.nexus.aws.model.S3File;
-import com.nexus.java.api.application.utils.Path;
+import com.nexus.java.api.application.util.Path;
 import com.nexus.java.api.domain.service.PaycheckEmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = Path.PATH_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public final class PaycheckEmployeeController {
 
     private final PaycheckEmployeeService paycheckEmployeeService;
 
-    @GetMapping(path = "paycheck/{userId}")
+    @GetMapping(path = Path.GET_EMPLOYEE_PAYCHECK_ID)
     @SuppressWarnings("unused")
     private ResponseEntity<List<S3File>> getPaychecksByUserId(@PathVariable String userId){
         var response = paycheckEmployeeService.getPaychecksByUserId(userId);
@@ -28,7 +28,7 @@ public final class PaycheckEmployeeController {
                              .body(response);
     }
 
-    @GetMapping(path = "paycheck/{userId}/{paycheckDate}")
+    @GetMapping(path = Path.GET_EMPLOYEE_PAYCHECK_DATE)
     @SuppressWarnings("unused")
     private ResponseEntity<byte[]> getPaycheckByUserIdAndPaycheckDate(@PathVariable String userId, @PathVariable String paycheckDate){
         var response = paycheckEmployeeService.getContentFile(userId, paycheckDate);

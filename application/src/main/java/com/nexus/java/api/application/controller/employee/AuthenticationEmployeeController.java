@@ -5,7 +5,7 @@ import com.nexus.java.api.application.dto.request.RegisterEmployeeDto;
 import com.nexus.java.api.application.dto.response.LoginEmployeeResponse;
 import com.nexus.java.api.application.dto.response.ResponseGeneric;
 import com.nexus.java.api.application.mapper.Mapper;
-import com.nexus.java.api.application.utils.Path;
+import com.nexus.java.api.application.util.Path;
 import com.nexus.java.api.domain.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = Path.PATH_EMPLOYEES, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public final class AuthenticationEmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping(path = "/login")
+    @PostMapping(path = Path.POST_LOGIN_EMPLOYEE)
     @SuppressWarnings("unused")
     private ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
         var operation = employeeService.login(loginEmployeeDto.toDomain());
@@ -32,7 +32,7 @@ public final class AuthenticationEmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping(path = "/validate")
+    @PostMapping(path = Path.POST_VALIDATE_EMPLOYEE)
     @SuppressWarnings("unused")
     private ResponseEntity<?> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
         this.employeeService.register(registerEmployeeDto.toDomain());
