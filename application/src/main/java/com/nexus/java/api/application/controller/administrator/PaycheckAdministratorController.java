@@ -21,24 +21,28 @@ public final class PaycheckAdministratorController {
     private final PaycheckEmployeeService paycheckEmployeeService;
 
     @PostMapping(path = "{userId}/{paycheckDate}", consumes = "multipart/form-data")
+    @SuppressWarnings("unused")
     private ResponseEntity<?> sendPaycheck(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         paycheckEmployeeService.putFile(file, userId, paycheckDate);
         return ResponseGeneric.response(HttpStatus.OK, "Arquivo enviado com sucesso");
     }
 
     @GetMapping(path = "employees")
+    @SuppressWarnings("unused")
     private ResponseEntity<List<AllEmployeesResponse>> allEmployees(){
         var response = Mapper.convertList(paycheckEmployeeService.findAllUsersWithBasicInfo(), AllEmployeesResponse.class);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping(path = "{userId}/{paycheckDate}", consumes = "multipart/form-data")
+    @SuppressWarnings("unused")
     private ResponseEntity<?> updatePaycheckOfUser(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         paycheckEmployeeService.updateFile(file, userId, paycheckDate);
         return ResponseGeneric.response(HttpStatus.OK, "Arquivo atualizado com sucesso");
     }
 
     @DeleteMapping(path = "{userId}/{paycheckDate}")
+    @SuppressWarnings("unused")
     private ResponseEntity<?> deletePaycheckOfUser(@PathVariable String userId, @PathVariable String paycheckDate){
         paycheckEmployeeService.deletePaycheckById(userId, paycheckDate);
         return ResponseGeneric.response(HttpStatus.OK, "Arquivo deletado com sucesso");

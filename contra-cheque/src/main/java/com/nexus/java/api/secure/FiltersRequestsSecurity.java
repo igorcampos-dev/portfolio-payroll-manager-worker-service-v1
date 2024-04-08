@@ -19,9 +19,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Configuration
+@SuppressWarnings("unused")
 public class FiltersRequestsSecurity {
 
     @Bean
+    @SuppressWarnings("unused")
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, SecurityContextInjector securityContextInjector) throws Exception {
        return RoutesService.builder()
                .http(httpSecurity)
@@ -33,6 +35,7 @@ public class FiltersRequestsSecurity {
     }
 
     @Bean
+    @SuppressWarnings("unused")
     public OncePerRequestFilter customFilter(SecurityContextInjector contextInjector) {
         return new OncePerRequestFilter() {
             @Override
@@ -41,6 +44,7 @@ public class FiltersRequestsSecurity {
             }};}
 
     @Bean
+    @SuppressWarnings("unused")
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }

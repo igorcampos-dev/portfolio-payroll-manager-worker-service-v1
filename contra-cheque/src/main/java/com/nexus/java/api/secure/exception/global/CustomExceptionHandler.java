@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.Instant;
 
-
-
 @RestControllerAdvice
+@SuppressWarnings("unused")
 public class CustomExceptionHandler {
 
 
@@ -42,77 +41,92 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(EmployeeNotFoundException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> handleValidationException(HttpServletRequest s) {
         return this.response("Funcionário não existe", HttpStatus.NOT_FOUND, s.getRequestURI());
     }
 
     @ExceptionHandler(NullPointerException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> handleNullPointerException(NullPointerException e, HttpServletRequest s) {
         return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(BadCredentialsException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> badRequestException(BadCredentialsException e, HttpServletRequest s) {
         return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(SmallPasswordException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> smallPasswordException(HttpServletRequest s) {
         return this.response("Senha inválida, use uma senha maior que 8 caracteres", HttpStatus.BAD_REQUEST, s.getRequestURI());
         }
 
     @ExceptionHandler(LargePasswordException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> largePasswordException(HttpServletRequest s) {
         return this.response("Senha inválida, use uma senha menor que 100 caracteres", HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(EmployeeAlreadyException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> userAlreadyExistsException(HttpServletRequest s) {
         return this.response("Usuário já existe", HttpStatus.CONFLICT, s.getRequestURI());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> methodArgumentINvalidException(MethodArgumentNotValidException e, HttpServletRequest s) {
         String defaultMessage = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         return this.response(defaultMessage, HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(FolderEmptyException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> folderEmptyException(FolderEmptyException e, HttpServletRequest s){
         return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(EmployeeNotAdminException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> userNotAdminException(HttpServletRequest s){
         return this.response("Usuário não é admin", HttpStatus.INTERNAL_SERVER_ERROR, s.getRequestURI());
     }
 
     @ExceptionHandler(EmptyEmployeeListException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> emptyEmployeeListException(EmptyEmployeeListException e, HttpServletRequest s){
         return this.response(e.getMessage(), HttpStatus.NOT_FOUND, s.getRequestURI());
     }
 
     @ExceptionHandler(FileNotExists.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> fileNotExists(FileNotExists e, HttpServletRequest s){
         return this.response(e.getMessage(), HttpStatus.NOT_FOUND, s.getRequestURI());
     }
 
     @ExceptionHandler(FileAlreadyExistsException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> fileAlreadyExistsException(FileAlreadyExistsException e, HttpServletRequest s){
         return this.response(e.getMessage(), HttpStatus.CONFLICT, s.getRequestURI());
     }
 
     @ExceptionHandler(InvalidContentTypeException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> invalidContentTypeException(InvalidContentTypeException e, HttpServletRequest s){
         return this.response(e.getMessage(), HttpStatus.UNSUPPORTED_MEDIA_TYPE, s.getRequestURI());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e, HttpServletRequest s){
         return this.response("O método de requisição não está disponivel para esse endpoint" , HttpStatus.INTERNAL_SERVER_ERROR, s.getRequestURI());
     }
 
     @ExceptionHandler(InvalidPaycheckDateException.class)
+    @SuppressWarnings("unused")
     public ResponseEntity<Error> invalidPaycheckDateException(InvalidPaycheckDateException e, HttpServletRequest s){
         return this.response(e.getMessage() , HttpStatus.INTERNAL_SERVER_ERROR, s.getRequestURI());
     }

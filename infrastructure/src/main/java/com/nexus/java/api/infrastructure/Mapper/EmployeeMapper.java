@@ -8,17 +8,11 @@ import com.nexus.java.api.infrastructure.entity.EmployeeEntity;
 import com.nexus.java.api.infrastructure.entity.enums.Profession;
 import com.nexus.java.api.infrastructure.entity.enums.UserRole;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class EmployeeMapper {
 
     private static final ObjectMapper Mapper = new ObjectMapper();
     private static final BCryptPasswordEncoder B_CRYPT_PASSWORD_ENCODER = new BCryptPasswordEncoder();
-
-    public static EmployeeEntity toEntity(Employee employee){
-      return Mapper.convertValue(employee, EmployeeEntity.class);
-    }
 
     public static EmployeeEntity PrincipalToEntity(EmployeeDbPrincipal employeeDbPrincipal, RegisterEmployeeModel registerEmployeeModel){
         return EmployeeEntity.builder()
@@ -35,9 +29,4 @@ public class EmployeeMapper {
         return Mapper.convertValue(employeeEntity, Employee.class);
     }
 
-    public static List<Employee> toEntityList(List<EmployeeEntity> employees) {
-        return employees.stream()
-                .map(employeeEntity -> Mapper.convertValue(employeeEntity, Employee.class))
-                .collect(Collectors.toList());
-    }
 }

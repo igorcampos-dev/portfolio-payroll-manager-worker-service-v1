@@ -25,6 +25,7 @@ public final class AuthenticationEmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping(path = "/login")
+    @SuppressWarnings("unused")
     private ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
         var operation = employeeService.login(loginEmployeeDto.toDomain());
         var response = Mapper.convert(operation, LoginEmployeeResponse.class);
@@ -32,6 +33,7 @@ public final class AuthenticationEmployeeController {
     }
 
     @PostMapping(path = "/validate")
+    @SuppressWarnings("unused")
     private ResponseEntity<?> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
         this.employeeService.register(registerEmployeeDto.toDomain());
         return ResponseGeneric.response(HttpStatus.CREATED, "Usuário criado com sucesso");

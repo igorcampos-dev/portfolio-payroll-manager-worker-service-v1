@@ -21,6 +21,7 @@ public final class PaycheckEmployeeController {
     private final PaycheckEmployeeService paycheckEmployeeService;
 
     @GetMapping(path = "paycheck/{userId}")
+    @SuppressWarnings("unused")
     private ResponseEntity<List<S3File>> getPaychecksByUserId(@PathVariable String userId){
         var response = paycheckEmployeeService.getPaychecksByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK)
@@ -28,6 +29,7 @@ public final class PaycheckEmployeeController {
     }
 
     @GetMapping(path = "paycheck/{userId}/{paycheckDate}")
+    @SuppressWarnings("unused")
     private ResponseEntity<byte[]> getPaycheckByUserIdAndPaycheckDate(@PathVariable String userId, @PathVariable String paycheckDate){
         var response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
         return ResponseEntity.status(HttpStatus.OK).body(response);

@@ -23,6 +23,7 @@ public final class AuthenticateAdministratorController {
     private final AdministratorService administratorService;
 
     @PostMapping(path = "/login")
+    @SuppressWarnings("unused")
     private ResponseEntity<AdministratorResponse> login(@RequestBody @Valid AdministratorLoginDto administratorLoginDto){
        var operation = administratorService.login(administratorLoginDto.toDomain());
        var response = Mapper.convert(operation, AdministratorResponse.class);

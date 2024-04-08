@@ -14,6 +14,7 @@ public class ValidateTokenPerRequest {
     private final AuthenticateRoutesUser authenticateRoutesUser;
 
     @Bean
+    @SuppressWarnings("unused")
     public SecurityContextInjector securityContextInjector() {
         return token -> {
             TokenProperties login = jwtService.decode(token);
