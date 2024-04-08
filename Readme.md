@@ -31,7 +31,7 @@ Siga as etapas abaixo para implantar o projeto localmente:
 1. Execute os seguintes comandos: :
    ```bash
    docker compose up -d mysql-db
-   docker compose up -d bucket
+   docker compose up -d aws-s3rver
 2. Aguarde até o processo de instalação do docker finalizar, depois,execute o projeto.
 
 ---
