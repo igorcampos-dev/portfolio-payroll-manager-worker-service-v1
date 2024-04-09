@@ -15,7 +15,7 @@ public class Path {
     public static final String POST_VALIDATE_EMPLOYEE = "/employees/validate";
     public static final String POST_VALIDATE_ADMIN = "/admin/login";
     public static final String GET_EMPLOYEE_PAYCHECK_ID = "/employees/paycheck/{userId}";
-    public static final String GET_EMPLOYEE_PAYCHECK_DATE = "/employees/paycheck/{userId}";
+    public static final String GET_EMPLOYEE_PAYCHECK_DATE = "/employees/paycheck/{paycheckDate}";
 
 
     private static final String SWAGGER_API_DOC = "/v3/api-docs/**";
