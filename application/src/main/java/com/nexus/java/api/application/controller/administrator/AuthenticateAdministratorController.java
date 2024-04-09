@@ -7,6 +7,7 @@ import com.nexus.java.api.application.util.Path;
 import com.nexus.java.api.domain.service.AdministratorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -25,8 +27,10 @@ public final class AuthenticateAdministratorController {
     @PostMapping(path = Path.POST_VALIDATE_ADMIN)
     @SuppressWarnings("unused")
     private ResponseEntity<AdministratorResponse> login(@RequestBody @Valid AdministratorLoginDto administratorLoginDto){
-       var operation = administratorService.login(administratorLoginDto.toDomain());
-       var response = Mapper.convert(operation, AdministratorResponse.class);
+        log.info("iniciou o processo de login do administrador...");
+        var operation = administratorService.login(administratorLoginDto.toDomain());
+        var response = Mapper.convert(operation, AdministratorResponse.class);
+        log.info("processo de login do administrador finalizado com sucesso.");
       return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
