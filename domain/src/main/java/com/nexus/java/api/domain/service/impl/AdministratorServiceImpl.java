@@ -8,7 +8,7 @@ import com.nexus.java.api.domain.model.LoginAdministratorModel;
 import com.nexus.java.api.domain.persistence.AdministratorPersistence;
 import com.nexus.java.api.domain.service.AdministratorService;
 import com.nexus.security.service.jwt.JwtService;
-import com.nexus.utils.Objects;
+import com.nexus.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.nexus.java.api.domain.model;
 
-import com.nexus.utils.Utils;
+import com.nexus.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class LoginEmployeeModel {
     private String password;
 
     public String getCpf() {
-        return Utils.formatCPF(cpf);
+        return SecurityUtils.formatCPF(cpf);
     }
 }
 

@@ -38,7 +38,7 @@
         <spring.web.version>6.1.5</spring.web.version>
         <nexus.java.lib.security>master-350901246c-1</nexus.java.lib.security>
         <nexus.java.lib.validations>-e8395ac93a-1</nexus.java.lib.validations>
-        <nexus.java.lib.utils>master-b9b8acf909-1</nexus.java.lib.utils>
+        <nexus.java.lib.utils>master-f9c6f54ad6-1</nexus.java.lib.utils>
         <nexus.java.lib.aws>main-b3f64280d5-1</nexus.java.lib.aws>
         <h2.version>2.2.224</h2.version>
     </properties>

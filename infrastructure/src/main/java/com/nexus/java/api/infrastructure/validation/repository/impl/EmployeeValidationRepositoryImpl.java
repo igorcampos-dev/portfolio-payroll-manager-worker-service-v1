@@ -6,7 +6,7 @@ import com.nexus.java.api.infrastructure.exceptions.EmployeeNotFoundException;
 import com.nexus.java.api.infrastructure.exceptions.EmptyEmployeeListException;
 import com.nexus.java.api.infrastructure.repository.EmployeeRepository;
 import com.nexus.java.api.infrastructure.validation.repository.EmployeeValidationRepository;
-import com.nexus.utils.Objects;
+import com.nexus.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
