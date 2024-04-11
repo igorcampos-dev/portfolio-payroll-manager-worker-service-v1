@@ -16,6 +16,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@SuppressWarnings("unused")
 @RequiredArgsConstructor
 @RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public final class PaycheckAdministratorController {
@@ -23,7 +24,6 @@ public final class PaycheckAdministratorController {
     private final PaycheckEmployeeService paycheckEmployeeService;
 
     @PostMapping(path = Path.POST_ADMIN, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @SuppressWarnings("unused")
     private ResponseEntity<?> sendPaycheck(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de envio de um contraCheque para a nuvem...");
         paycheckEmployeeService.putFile(file, userId, paycheckDate);
@@ -32,7 +32,6 @@ public final class PaycheckAdministratorController {
     }
 
     @GetMapping(path = Path.GET_EMPLOYEES)
-    @SuppressWarnings("unused")
     private ResponseEntity<List<AllEmployeesResponse>> allEmployees(){
         log.info("iniciou o processo de busca de todos os funcionários...");
         var response = Mapper.convertList(paycheckEmployeeService.findAllUsersWithBasicInfo(), AllEmployeesResponse.class);
@@ -41,7 +40,6 @@ public final class PaycheckAdministratorController {
     }
 
     @PutMapping(path = Path.PUT_ADMIN, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @SuppressWarnings("unused")
     private ResponseEntity<?> updatePaycheckOfUser(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de atualização de um contraCheque...");
         paycheckEmployeeService.updateFile(file, userId, paycheckDate);
@@ -50,7 +48,6 @@ public final class PaycheckAdministratorController {
     }
 
     @DeleteMapping(path = Path.DELETE_ADMIN)
-    @SuppressWarnings("unused")
     private ResponseEntity<?> deletePaycheckOfUser(@PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de exclusão de um contraCheque");
         paycheckEmployeeService.deletePaycheckById(userId, paycheckDate);

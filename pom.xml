@@ -41,6 +41,7 @@
         <nexus.java.lib.utils>master-f9c6f54ad6-1</nexus.java.lib.utils>
         <nexus.java.lib.aws>main-b3f64280d5-1</nexus.java.lib.aws>
         <h2.version>2.2.224</h2.version>
+        <caffeine.version>3.1.8</caffeine.version>
     </properties>
 
     <dependencyManagement>
@@ -148,6 +149,12 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
 
         </dependencies>

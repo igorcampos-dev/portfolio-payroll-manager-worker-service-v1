@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 @RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public final class AuthenticationEmployeeController {
 
     private final EmployeeService employeeService;
 
     @PostMapping(path = Path.POST_LOGIN_EMPLOYEE)
-    @SuppressWarnings("unused")
     private ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
         log.info("iniciou o processo de login de funcionários...");
         var operation = employeeService.login(loginEmployeeDto.toDomain());
@@ -37,7 +37,6 @@ public final class AuthenticationEmployeeController {
     }
 
     @PostMapping(path = Path.POST_VALIDATE_EMPLOYEE)
-    @SuppressWarnings("unused")
     private ResponseEntity<?> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
         log.info("iniciou o processo de registro de um funcionário...");
         this.employeeService.register(registerEmployeeDto.toDomain());
