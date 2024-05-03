@@ -1,0 +1,68 @@
+server:
+  port: ${SERVER_PORT:8085}
+  servlet:
+    context-path: ${CONTEXT_PATH:/tech-spring-solutions}
+
+spring:
+  application:
+    name: loopit.paysheet
+
+  security:
+    jwt:
+      signature: ${SIGNATURE:CCgbVvfCkAx884yCIadHEOSiO3wOw3AY1OCFvXgwD2TNTxDgTuXi3OrDaH4rzEGS0J6gynpO8K13nT70pbAaDGQdhEOk8G6JRtdz}
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/dev?allowPublicKeyRetrieval=true}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:KBf9]xEjq~K}
+    driver-class-name: ${DB_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
+    hikari:
+      connection-timeout: ${DB_TIMEOUT:30000}
+      maximum-pool-size: ${DB_MAXIMUM_POOL_SIZE:3}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DB_DDL_AUTO:update}
+    open-in-view: ${DB_OPEN_VIEW:false}
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+  aws:
+    credentials:
+      serviceEndpoint: ${AWS_ENDPOINT:http://0.0.0.0:3000}
+      accessKey: ${AWS_ACCESS_KEY:S3RVER}
+      secretKey: ${AWS_SECRET_KEY:S3RVER}
+      region: ${AWS_REGION:us-east-1}
+      bucketName: ${AWS_BUCKET_NAME:funcionarios}
+
+enterprise:
+  credential:
+    url: ${ENTERPRISE_URL:jdbc:mysql://localhost:3306/principal?allowPublicKeyRetrieval=true}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:KBf9]xEjq~K}
+
+
+logging:
+  level:
+    org.springframework.boot.web.embedded.tomcat.TomcatWebServer: WARN
+    org.springframework.security.web.DefaultSecurityFilterChain: WARN
+    org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean: WARN
+    com.zaxxer.hikari.HikariDataSource: WARN
+    com.zaxxer.hikari.pool.HikariPool: WARN
+    org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: WARN
+    org.springframework.data.repository.config.RepositoryConfigurationDelegate: WARN
+    org.apache.catalina.core.StandardService: WARN
+    org.hibernate.jpa.internal.util.LogHelper: WARN
+    org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: WARN
+    org.hibernate.Version: WARN
+    org.hibernate.cache.internal.RegionFactoryInitiator: WARN
+
+
+
+
+
+
+
+
+

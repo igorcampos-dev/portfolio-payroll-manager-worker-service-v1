@@ -1,0 +1,58 @@
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${CONTEXT_PATH}
+
+spring:
+  application:
+    name: loopit.paysheet
+
+  security:
+    jwt:
+      signature: ${SIGNATURE}
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER_CLASS}
+    hikari:
+      connection-timeout: ${DB_TIMEOUT}
+      maximum-pool-size: ${DB_MAXIMUM_POOL_SIZE}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DB_DDL_AUTO}
+    open-in-view: ${DB_OPEN_VIEW}
+
+  aws:
+    credentials:
+      serviceEndpoint: ${AWS_ENDPOINT}
+      accessKey: ${AWS_ACCESS_KEY}
+      secretKey: ${AWS_SECRET_KEY}
+      region: ${AWS_REGION}
+      bucketName: ${AWS_BUCKET_NAME}
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+enterprise:
+  credential:
+    url: ${ENTERPRISE_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+logging:
+  level:
+    org.springframework.boot.web.embedded.tomcat.TomcatWebServer: WARN
+    org.springframework.security.web.DefaultSecurityFilterChain: WARN
+    org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean: WARN
+    com.zaxxer.hikari.HikariDataSource: WARN
+    com.zaxxer.hikari.pool.HikariPool: WARN
+    org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: WARN
+    org.springframework.data.repository.config.RepositoryConfigurationDelegate: WARN
+    org.apache.catalina.core.StandardService: WARN
+    org.hibernate.jpa.internal.util.LogHelper: WARN
+    org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: WARN
+    org.hibernate.Version: WARN
+    org.hibernate.cache.internal.RegionFactoryInitiator: WARN
