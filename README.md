@@ -80,7 +80,7 @@ Todos os Curls declarados no Readme são do ambiente de dev, certifique-se de mu
 
 ## Portas do projeto:
 - **docker:** 80
-- **local:** 8087
+- **local:** 8085
 - **dev:** 80
 - **hml:** 8081
 - **prd:** 8083
@@ -93,7 +93,7 @@ Todos os Curls declarados no Readme são do ambiente de dev, certifique-se de mu
 ### `POST /tech-spring-solutions/nexus/employees/login`
 
 ```bash
-curl --location 'http://localhost:8087/tech-spring-solutions/nexus/employees/login' \
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/login' \
 --header 'Content-Type: application/json' \
 --data '{
     "cpf": "CPF_USUARIO_REGISTRADO",
@@ -375,7 +375,7 @@ Com base nessas informações, o contra cheque especificado é atualizado.
 ### `DELETE /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location --request DELETE 'http://localhost:8087/tech-spring-solutions/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \
+curl --location --request DELETE 'http://localhost:8085/tech-spring-solutions/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \
 --header 'Authorization: Bearer TOKEN_BEARER_ADMIN'
 ```
 
