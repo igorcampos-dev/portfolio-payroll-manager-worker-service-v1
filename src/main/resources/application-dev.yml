@@ -42,3 +42,18 @@ enterprise:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
 
+logging:
+  level:
+    org.springframework.boot.web.embedded.tomcat.TomcatWebServer: WARN
+    org.springframework.security.web.DefaultSecurityFilterChain: WARN
+    org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean: WARN
+    com.zaxxer.hikari.HikariDataSource: WARN
+    com.zaxxer.hikari.pool.HikariPool: WARN
+    org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator: WARN
+    org.springframework.data.repository.config.RepositoryConfigurationDelegate: WARN
+    org.apache.catalina.core.StandardService: WARN
+    org.hibernate.jpa.internal.util.LogHelper: WARN
+    org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: WARN
+    org.hibernate.Version: WARN
+    org.hibernate.cache.internal.RegionFactoryInitiator: WARN
+
