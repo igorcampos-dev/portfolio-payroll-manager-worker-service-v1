@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeePrincipalEntity {
+
     private Integer code;
     private Profession profession;
     private String name;
+
 }

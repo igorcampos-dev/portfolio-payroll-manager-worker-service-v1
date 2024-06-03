@@ -48,4 +48,5 @@ public class PrincipalRepositoryImpl implements PrincipalRepository {
             throw new NullPointerException("Usuário não existe.");
             }
     }
+
 }

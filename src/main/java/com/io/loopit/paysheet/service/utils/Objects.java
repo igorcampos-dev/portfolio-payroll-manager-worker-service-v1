@@ -7,4 +7,5 @@ public class Objects {
             throw exception;
         }
     }
+
 }
