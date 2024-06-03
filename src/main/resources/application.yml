@@ -42,7 +42,6 @@ enterprise:
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:KBf9]xEjq~K}
 
-
 logging:
   level:
     org.springframework.boot.web.embedded.tomcat.TomcatWebServer: WARN
