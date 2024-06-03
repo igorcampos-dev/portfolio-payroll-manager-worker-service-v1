@@ -36,4 +36,5 @@ public class AdministratorServiceImpl implements AdministratorService {
         boolean condition = employee.getRole() != UserRole.ADMIN;
         Objects.throwIfTrue(condition, new AccessDeniedException("Usuário não tem permissão para acessar este recurso, apenas administradores são permitidos."));
     }
+
 }

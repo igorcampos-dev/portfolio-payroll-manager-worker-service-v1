@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@SuppressWarnings("unused")
 @RequiredArgsConstructor
 @RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthenticationEmployeeController {
