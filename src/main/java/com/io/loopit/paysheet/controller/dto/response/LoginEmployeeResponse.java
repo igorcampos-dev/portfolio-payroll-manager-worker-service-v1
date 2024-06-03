@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginEmployeeResponse {
+
     private String id;
     private Integer paychecks;
     private String name;
@@ -26,4 +27,5 @@ public class LoginEmployeeResponse {
                 .token(token)
                 .build();
     }
+
 }

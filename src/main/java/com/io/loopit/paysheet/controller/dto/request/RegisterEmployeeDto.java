@@ -1,6 +1,5 @@
 package com.io.loopit.paysheet.controller.dto.request;
 
-import com.io.loopit.paysheet.controller.util.ValidatePasswordUtils;
 import com.io.loopit.paysheet.model.EmployeeEntity;
 import com.io.loopit.paysheet.model.EmployeePrincipalEntity;
 import com.io.loopit.paysheet.model.enums.UserRole;
@@ -38,4 +37,5 @@ public class RegisterEmployeeDto {
                 .profession(employeeProperties.getProfession())
                 .build();
     }
+
 }
