@@ -22,4 +22,5 @@ public class AdministratorLoginDto {
     @NotNull(message = "A senha não pode ser nulo")
     @NotEmpty(message = "A senha não pode ser vazio")
     private String password;
+
 }

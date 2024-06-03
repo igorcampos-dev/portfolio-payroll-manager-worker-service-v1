@@ -42,4 +42,5 @@ public class ConnectionFactory {
 				                           dbProperties.getUsername(),
 				                           dbProperties.getPassword());
 	}
+
 }

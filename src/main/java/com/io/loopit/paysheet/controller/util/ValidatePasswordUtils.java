@@ -10,4 +10,5 @@ public class ValidatePasswordUtils {
             throw new Exception("A senha deve ter entre 10 e 25 caracteres");
         }
     }
+
 }
