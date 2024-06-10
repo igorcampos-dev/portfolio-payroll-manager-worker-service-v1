@@ -1,15 +1,15 @@
-# API de Contra Cheque
+# API de Contra Cheque 📝
 
 ---
 
-## Introdução
+## Introdução 🔰
 
 Este projeto foi desenvolvido por Igor de Campos com o objetivo de testar suas habilidades lógicas e experiências em
 programação.
 
 ---
 
-## Sobre o Projeto
+## Sobre o Projeto 🔍
 
 A API de Contra Cheques é uma solução empresarial que permite que qualquer funcionário de uma empresa possa consultar
 seus contra cheques de maneira fácil e acessível, disponível 24 horas por dia. Ela oferece funcionalidades como a
@@ -18,39 +18,41 @@ visualizá-lo online.
 
 ---
 
-## Processo de instalação
+## Pré-requisitos 💻
 
-### Implantação Local
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<img src="https://img.shields.io/badge/Jdk%2017-%23ED8B00.svg?logo=openjdk&logoColor=white" />
+<img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff">
+</div>
 
-1. **Requisitos minimos:**
-    - Jdk 17
-    - Docker
+---
 
-Siga as etapas abaixo para implantar o projeto localmente:
+## Processo de instalação 🔧
 
-1. Execute os seguintes comandos: :
+### Implantação Local 📍
+
+1. Execute os seguintes comandos:
    ```bash
    docker compose up -d mysql-db
    docker compose up -d aws-s3rver
+   ```
+   
 2. Aguarde até o processo de instalação do docker finalizar, depois,execute o projeto.
 
 ---
 
-### Implantação no Docker
-
-1. **Requisitos minimos:**
-    - Docker
-
-Siga as etapas abaixo para implantar o projeto no Docker:
+### Implantação no Docker 🐳
 
 1. Execute:
    ```bash
    docker compose up
+   ```
+   
 2. Aguarde até o processo de instalação finalizar.
 
 ---
 
-## Especificação geral do Projeto, entendendo o seu fluxo:
+## Especificação geral do Projeto, entendendo o seu fluxo
 
 ### Vamos entender com mais facilidade,como pode ser desenvolvido o frontend do projeto,para que ele possa se conectar posivitamente com o backend do projeto.
 
@@ -69,36 +71,24 @@ Siga as etapas abaixo para implantar o projeto no Docker:
     - Dado que o administrador sabe que o funcionário X não possui o contraCheque do Mês,o administrador acessa uma tela ao clicar em "enviar contra Cheque", preenche o campo: nome do usuário, data do contraCheque e envia para o backend. [clique aqui](#post-nexusadminuseridpaycheckdate)
     - Dado que o administrador notou uma indiferença relatada por algum funcionário,ele decide atualizar o contra cheque do mês x, acessa a tela ao clicar: "atualizar contra Cheque",e coloca: nome do usuário, data do contraCheque e envia para o backend. [clique aqui](#put-nexusadminuseridpaycheckdate)
     - Usuário decide efetuar o "logout" clicando no botão de sair,então o sistema deve limpar as credenciais armazenadas no cache.
-
+   
 ---
 
-## Atenção!
-
-Todos os Curls declarados no Readme são do ambiente de dev, certifique-se de mudar a porta para a porta do ambiente adequado
-
----
-
-## Portas do projeto:
+## Portas do projeto 🚪
 - **docker:** 80
 - **local:** 8085
 - **dev:** 80
 - **hml:** 8081
 - **prd:** 8083
----
-
-## Rotas para Funcionários
 
 ---
+
+## Rotas para Funcionários 👷‍♂️➡️🗺️
 
 ### `POST /tech-spring-solutions/nexus/employees/login`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/login' \
---header 'Content-Type: application/json' \
---data '{
-    "cpf": "CPF_USUARIO_REGISTRADO",
-    "password": "SENHA_CRIADA"
-}'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/login' \--header 'Content-Type: application/json' \--data '{"cpf": "CPF_USUARIO_REGISTRADO","password": "SENHA_CRIADA"}'
 ```
 
 Esta rota é utilizada para efetuar o login do funcionário. A existência do funcionário na empresa é verificada com base
@@ -137,12 +127,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 ### `POST /tech-spring-solutions/nexus/employees/validate`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/validate' \
---header 'Content-Type: application/json' \
---data '{
-"cpf": "CPF_FUNCIONARIO EXISTENTE",
-"password": "SENHA_CRIADA"
-}'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/validate' \--header 'Content-Type: application/json' \--data '{"cpf": "CPF_FUNCIONARIO EXISTENTE","password": "SENHA_CRIADA"}'
 ```
 
 Nesta rota, o funcionário pode criar sua conta para receber seus contra cheques online. Para isso, ele precisará
@@ -170,8 +155,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer o registro
 ### `GET /tech-spring-solutions/nexus/paycheck/{userId}`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USUARIO_AQUI' \
---header 'Authorization: Bearer SEU_TOKEN_AQUI'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USUARIO_AQUI' \--header 'Authorization: Bearer SEU_TOKEN_AQUI'
 ```
 
 Nesta rota, o ID do funcionário é recebido através da rota e todos os contra cheques são retornados em ordem de data
@@ -202,8 +186,7 @@ Nesta rota, o ID do funcionário e a data do contra cheque são recebidos. A rot
 bytes, permitindo que a interface do usuário torne visível o contra cheque do funcionário.
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USARIO/DATA_DO_CONTRACHEQUE' \
---header 'Authorization: Bearer TOKEN_AQUI'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USARIO/DATA_DO_CONTRACHEQUE' \--header 'Authorization: Bearer TOKEN_AQUI'
 ```
 
 <br>
@@ -225,19 +208,12 @@ curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/pay
 
 ---
 
-## Rotas para Administradores
-
----
+## Rotas para Administradores 🧑‍💼➡️🗺️
 
 ### `POST /tech-spring-solutions/nexus/admin/login`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/login' \
---header 'Content-Type: application/json' \
---data '{
-    "cpf": "58892239090",
-    "password": "224654"
-}'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/login' \--header 'Content-Type: application/json' \--data '{"cpf": "58892239090","password": "224654"}'
 ```
 
 Esta rota é utilizada para efetuar o login do administrador. A existência do administrador na empresa é verificada com
@@ -273,9 +249,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 ### `POST /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/USER_ID/DATA_DO_CONTRA_CHEQUE' \
---header 'Authorization: Bearer TOKEN_AQUI' \
---form 'file=@"CAMINHO_DO_ARQUIVO"'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/USER_ID/DATA_DO_CONTRA_CHEQUE' \--header 'Authorization: Bearer TOKEN_AQUI' \--form 'file=@"CAMINHO_DO_ARQUIVO"'
 ```
 
 `multipart`: contra cheque
@@ -288,7 +262,7 @@ Nesta rota, o arquivo do contra cheque é enviado como um multipartFile para o f
 2. **data do arquivo, seguindo a convensão, ex:**
     - 03-2023  (mes,ano)
 
-3**Arquivo pdf.**
+3. **Arquivo pdf.**
 
 <br>
 
@@ -305,8 +279,7 @@ Nesta rota, o arquivo do contra cheque é enviado como um multipartFile para o f
 ### `GET /tech-spring-solutions/nexus/admin/employees`
 
 ```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/employees' \
---header 'Authorization: Bearer SEU_TOKEN_AQUI'
+curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/employees' \--header 'Authorization: Bearer SEU_TOKEN_AQUI'
 ```
 
 Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno incluirá o ID, nome do funcionário e profissão.
@@ -346,9 +319,7 @@ Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno
 ### `PUT /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location --request PUT 'http://localhost:8085/tech-spring-solutions/nexus/admin/ID_DO_USUARIO/DATA_CONTRACHEQUE' \
---header 'Authorization: Bearer TOKEN_BEARER AQUI' \
---form 'DIRETORIO_DO_ARQUIVO'
+curl --location --request PUT 'http://localhost:8085/tech-spring-solutions/nexus/admin/ID_DO_USUARIO/DATA_CONTRACHEQUE' \--header 'Authorization: Bearer TOKEN_BEARER AQUI' \--form 'DIRETORIO_DO_ARQUIVO'
 ```
 
 Nesta rota, o ID do funcionário e a data do contra cheque são recebidos, juntamente com um novo arquivo de contra cheque.
@@ -375,8 +346,7 @@ Com base nessas informações, o contra cheque especificado é atualizado.
 ### `DELETE /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
 
 ```bash
-curl --location --request DELETE 'http://localhost:8085/tech-spring-solutions/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \
---header 'Authorization: Bearer TOKEN_BEARER_ADMIN'
+curl --location --request DELETE 'http://localhost:8085/tech-spring-solutions/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \--header 'Authorization: Bearer TOKEN_BEARER_ADMIN'
 ```
 
 <br>
