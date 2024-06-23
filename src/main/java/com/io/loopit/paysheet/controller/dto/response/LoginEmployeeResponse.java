@@ -18,7 +18,7 @@ public class LoginEmployeeResponse {
     private String profession;
     private String token;
 
-    public static LoginEmployeeResponse buildBody(EmployeeEntity employee, String token){
+    public static LoginEmployeeResponse build(EmployeeEntity employee, String token){
         return LoginEmployeeResponse.builder()
                 .id(employee.getId())
                 .name(employee.getName())

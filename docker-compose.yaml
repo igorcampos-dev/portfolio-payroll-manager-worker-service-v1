@@ -48,11 +48,11 @@ services:
     networks:
       - api
 
-  aws-s3rver:
+  bucket:
     networks:
       api:
         ipv4_address: 172.18.0.22
-    container_name: aws-s3rver
+    container_name: bucket
     build:
       context: ./src/main/docker/bucket
       dockerfile: Dockerfile

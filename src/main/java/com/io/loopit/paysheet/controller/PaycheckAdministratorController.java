@@ -2,7 +2,7 @@ package com.io.loopit.paysheet.controller;
 
 import com.io.loopit.paysheet.controller.dto.response.AllEmployeesResponse;
 import com.io.loopit.paysheet.controller.dto.response.ResponseGeneric;
-import com.io.loopit.paysheet.controller.util.Path;
+import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +16,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+
 @RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PaycheckAdministratorController {
 

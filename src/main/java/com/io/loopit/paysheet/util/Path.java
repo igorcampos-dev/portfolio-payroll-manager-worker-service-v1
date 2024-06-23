@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.controller.util;
+package com.io.loopit.paysheet.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

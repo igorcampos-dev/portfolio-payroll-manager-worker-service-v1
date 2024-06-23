@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.service.utils;
+package com.io.loopit.paysheet.util;
 
 public class Objects {
 

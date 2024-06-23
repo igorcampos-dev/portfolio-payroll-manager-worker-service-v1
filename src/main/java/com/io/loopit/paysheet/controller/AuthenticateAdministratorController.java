@@ -2,7 +2,7 @@ package com.io.loopit.paysheet.controller;
 
 import com.io.loopit.paysheet.controller.dto.request.AdministratorLoginDto;
 import com.io.loopit.paysheet.controller.dto.response.AdministratorResponse;
-import com.io.loopit.paysheet.controller.util.Path;
+import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.service.AdministratorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
