@@ -21,7 +21,7 @@ s3rver.run((err, host, port) => {
   if (err) {
     console.error(err);
   } else {
-    console.log('S3rver listening on host %s and port %d', host, port);
+    console.log('S3rver listening on host %s', host);
   }
 });
 

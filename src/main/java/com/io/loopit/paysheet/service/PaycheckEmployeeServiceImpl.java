@@ -3,8 +3,8 @@ package com.io.loopit.paysheet.service;
 import com.io.loopit.paysheet.controller.dto.response.AllEmployeesResponse;
 import com.io.loopit.paysheet.model.EmployeeEntity;
 import com.io.loopit.paysheet.repository.EmployeeRepository;
-import com.io.loopit.paysheet.service.utils.DateUtils;
-import com.io.loopit.paysheet.service.utils.FileUtils;
+import com.io.loopit.paysheet.util.DateUtils;
+import com.io.loopit.paysheet.util.FileUtils;
 import com.nexus.aws.cloud.S3;
 import com.nexus.aws.model.S3File;
 import lombok.RequiredArgsConstructor;
@@ -104,7 +104,7 @@ public class PaycheckEmployeeServiceImpl implements PaycheckEmployeeService {
     }
 
     private void isValidPut(String contentType, String paycheckDate){
-        FileUtils.validateContentTypeIsApplicationPdf(contentType);
+        FileUtils.isPdf(contentType);
         DateUtils.isValidMonthYearFormat(paycheckDate);
     }
 

@@ -2,12 +2,12 @@ package com.io.loopit.paysheet.service;
 
 import com.io.loopit.paysheet.controller.dto.request.AdministratorLoginDto;
 import com.io.loopit.paysheet.controller.dto.response.AdministratorResponse;
-import com.io.loopit.paysheet.controller.util.ValidatePasswordUtils;
+import com.io.loopit.paysheet.util.ValidatePasswordUtils;
 import com.io.loopit.paysheet.model.EmployeeEntity;
 import com.io.loopit.paysheet.model.enums.UserRole;
 import com.io.loopit.paysheet.repository.EmployeeRepository;
 import com.io.loopit.paysheet.security.util.JwtUtil;
-import com.io.loopit.paysheet.service.utils.Objects;
+import com.io.loopit.paysheet.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,6 @@ public class AdministratorServiceImpl implements AdministratorService {
                 .token(jwtUtil.encode(employee))
                 .build();
     }
-
 
     private void isNotAdmin(EmployeeEntity employee){
         boolean condition = employee.getRole() != UserRole.ADMIN;

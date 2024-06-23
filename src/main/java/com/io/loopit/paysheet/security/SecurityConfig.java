@@ -1,6 +1,6 @@
 package com.io.loopit.paysheet.security;
 
-import com.io.loopit.paysheet.controller.util.Path;
+import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.security.filter.Filter;
 import com.io.loopit.paysheet.security.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

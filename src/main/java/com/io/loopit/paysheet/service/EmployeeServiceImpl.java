@@ -3,7 +3,8 @@ package com.io.loopit.paysheet.service;
 import com.io.loopit.paysheet.controller.dto.request.LoginEmployeeDto;
 import com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto;
 import com.io.loopit.paysheet.controller.dto.response.LoginEmployeeResponse;
-import com.io.loopit.paysheet.controller.util.ValidatePasswordUtils;
+import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
+import com.io.loopit.paysheet.util.ValidatePasswordUtils;
 import com.io.loopit.paysheet.model.EmployeeEntity;
 import com.io.loopit.paysheet.model.EmployeePrincipalEntity;
 import com.io.loopit.paysheet.repository.EmployeeRepository;
@@ -30,18 +31,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         ValidatePasswordUtils.validPass(loginEmployeeDto.getPassword());
         String token = this.jwtUtil.encode(this.authenticate(loginEmployeeDto));
         EmployeeEntity employee = this.employeeRepository.findByCpfOrElseThrow(loginEmployeeDto.getCpf());
-        return LoginEmployeeResponse.buildBody(employee, token);
+        return LoginEmployeeResponse.build(employee, token);
     }
 
     @Override
-    public void register(RegisterEmployeeDto registerEmployeeDto) {
+    public RegisterEmployeeResponse register(RegisterEmployeeDto registerEmployeeDto) {
         this.employeeRepository.ifUserExistsThrow(registerEmployeeDto.getCpf());
-        EmployeePrincipalEntity employeeProperties = this.validateCpfAndNameAfterGetProperties(registerEmployeeDto.getCpf());
-
+        EmployeePrincipalEntity employeeProperties = this.getProperties(registerEmployeeDto.getCpf());
         ValidatePasswordUtils.validPass(registerEmployeeDto.getPassword());
-
-        this.employeeRepository.save(registerEmployeeDto.toEntity(employeeProperties));
-        this.paycheckEmployeeService.createFolder(employeeProperties.getName());
+        EmployeeEntity employee = this.employeeRepository.save(registerEmployeeDto.toEntity(employeeProperties));
+        this.paycheckEmployeeService.createFolder(employee.getName());
+        return employee.toRegisterResponse();
     }
 
     private UserDetails authenticate(LoginEmployeeDto loginDTO){
@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return (UserDetails) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
     }
 
-    private EmployeePrincipalEntity validateCpfAndNameAfterGetProperties(String cpf) {
+    private EmployeePrincipalEntity getProperties(String cpf) {
         return this.principalRepository.findDescriptionByCpf(cpf);
     }
 

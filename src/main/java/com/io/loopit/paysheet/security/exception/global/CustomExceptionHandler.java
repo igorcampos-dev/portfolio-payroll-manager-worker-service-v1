@@ -14,6 +14,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.nio.file.AccessDeniedException;
 import java.time.Instant;
 
 @Slf4j
@@ -40,6 +42,12 @@ public class CustomExceptionHandler {
     public ResponseEntity<Error> handleNullPointerException(NullPointerException e, HttpServletRequest s) {
         log.error("method=NullPointerException | message: {}", e.getMessage());
         return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Error> handleAccessDeniedException(AccessDeniedException e, HttpServletRequest s) {
+        log.error("method=AccessDeniedException | message: {}", e.getMessage());
+        return this.response(e.getMessage(), HttpStatus.UNAUTHORIZED, s.getRequestURI());
     }
 
     @ExceptionHandler(BadCredentialsException.class)
