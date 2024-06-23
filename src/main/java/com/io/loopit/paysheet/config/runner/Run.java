@@ -23,7 +23,7 @@ public class Run implements CommandLineRunner {
     @Override
     public void run(String... args) {
         createEmployeeIfNotFound("05605662040", UserRole.USER, Profession.REPOSITOR, "Igor de campos", 993302);
-       createEmployeeIfNotFound("58892239090", UserRole.ADMIN, Profession.GERENTE_DE_LOJA, "admin", 993303);
+        createEmployeeIfNotFound("58892239090", UserRole.ADMIN, Profession.GERENTE_DE_LOJA, "admin", 993303);
     }
 
     private void createEmployeeIfNotFound(String cpf, UserRole role, Profession profession, String name, Integer code) {
@@ -34,7 +34,7 @@ public class Run implements CommandLineRunner {
                     .role(role)
                     .profession(profession)
                     .name(name)
-                    .password(PASSWORD_ENCODER.encode("224654"))
+                    .password(PASSWORD_ENCODER.encode("23097AaQs2"))
                     .build();
 
             s3.createFolder(employee.getName().toLowerCase().replace(" ", "-"));

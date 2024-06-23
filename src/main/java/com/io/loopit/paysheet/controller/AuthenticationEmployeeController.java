@@ -1,10 +1,10 @@
 package com.io.loopit.paysheet.controller;
 
 import com.io.loopit.paysheet.controller.dto.request.LoginEmployeeDto;
-import com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto;
+import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.controller.dto.response.LoginEmployeeResponse;
 import com.io.loopit.paysheet.controller.dto.response.ResponseGeneric;
-import com.io.loopit.paysheet.controller.util.Path;
+import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +34,11 @@ public class AuthenticationEmployeeController {
     }
 
     @PostMapping(path = Path.POST_VALIDATE_EMPLOYEE)
-    public ResponseEntity<?> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
+    public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount(@RequestBody @Valid com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto registerEmployeeDto){
         log.info("iniciou o processo de registro de um funcionário...");
-        this.employeeService.register(registerEmployeeDto);
+        RegisterEmployeeResponse employee = this.employeeService.register(registerEmployeeDto);
         log.info("processo de registro de um funcionário finalizado com sucesso.");
-        return ResponseGeneric.response(HttpStatus.CREATED, "Usuário criado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body(employee);
     }
 
 }

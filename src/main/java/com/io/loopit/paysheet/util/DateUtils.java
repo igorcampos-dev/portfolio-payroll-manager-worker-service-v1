@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.service.utils;
+package com.io.loopit.paysheet.util;
 
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import java.util.regex.Matcher;

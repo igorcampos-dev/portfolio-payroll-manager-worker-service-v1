@@ -1,5 +1,6 @@
 package com.io.loopit.paysheet.model;
 
+import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.model.enums.Profession;
 import com.io.loopit.paysheet.model.enums.UserRole;
 import lombok.*;
@@ -117,4 +118,12 @@ public class EmployeeEntity implements UserDetails {
         return true;
     }
 
+    public RegisterEmployeeResponse toRegisterResponse() {
+        return RegisterEmployeeResponse.builder()
+                .name(this.name)
+                .profession(this.profession)
+                .code(this.code)
+                .cpf(this.cpf)
+                .build();
+    }
 }

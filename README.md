@@ -16,6 +16,8 @@ seus contra cheques de maneira fácil e acessível, disponível 24 horas por dia
 pesquisa de contra cheques em uma data específica, a possibilidade de fazer o download do contra cheque ou de
 visualizá-lo online.
 
+A collection com endpoints de exemplos se encontra na pasta `collection` do projeto.
+
 ---
 
 ## Pré-requisitos 💻

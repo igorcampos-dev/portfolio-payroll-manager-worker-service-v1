@@ -1,6 +1,6 @@
 package com.io.loopit.paysheet.controller;
 
-import com.io.loopit.paysheet.controller.util.Path;
+import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
 import com.nexus.aws.model.S3File;
 import lombok.RequiredArgsConstructor;
