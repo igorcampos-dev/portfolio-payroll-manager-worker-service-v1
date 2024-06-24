@@ -2,10 +2,9 @@ package com.io.loopit.paysheet.security.filter;
 
 import com.io.loopit.paysheet.security.response.ErrorResponse;
 import com.io.loopit.paysheet.security.util.JwtUtil;
+import com.io.loopit.paysheet.util.Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import jakarta.servlet.FilterChain;
@@ -29,29 +28,20 @@ public class Filter extends OncePerRequestFilter {
 
         try {
             String jwt = request.getHeader("Authorization");
-
-            if (jwt != null)
-               authenticate(jwt);
-
+            jwtUtil.authenticate(jwt);
           filterChain.doFilter(request, response);
-          unauthorized(response, request);
         } catch (Exception e) {
             ErrorResponse.getError(response, e, request);
         }
     }
 
-    private void authenticate(String jwt) {
-
-        if (jwtUtil.isValidToken(jwt)) {
-            Authentication authentication = jwtUtil.authenticate(jwt);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
+    @Override
+    protected boolean shouldNotFilter(@Nullable HttpServletRequest request) {
+        assert request != null;
+        return Path.getPermitAllRoutes()
+                   .stream()
+                   .anyMatch(route -> request.getServletPath().contains(route.getRoute()));
     }
 
-    private void unauthorized(HttpServletResponse response, HttpServletRequest request) {
-        if (response.getStatus() == HttpServletResponse.SC_UNAUTHORIZED) {
-            ErrorResponse.getErrorUnauthorized(response, request);
-        }
-    }
 
 }

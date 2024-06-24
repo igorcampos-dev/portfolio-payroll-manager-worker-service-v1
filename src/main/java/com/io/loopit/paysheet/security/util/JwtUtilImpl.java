@@ -7,9 +7,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.time.Instant;
@@ -27,13 +27,13 @@ public class JwtUtilImpl implements JwtUtil {
     @Value("${spring.security.jwt.signature}")
     private String signature;
 
-    @Override
-    public boolean isValidToken(String jwt) {
+    private boolean isValidToken(String jwt) {
         try {
+            this.isNull(jwt);
             DecodedJWT jwtAuth = this.decodedJWT(jwt);
             return this.hasClaims(jwtAuth);
         } catch (JWTVerificationException exception) {
-            return false;
+            throw new JWTVerificationException("Rota authenticada, é necessário enviar um token válido.");
         }
     }
 
@@ -51,12 +51,19 @@ public class JwtUtilImpl implements JwtUtil {
     }
 
     @Override
-    public Authentication authenticate(String jwt) {
-        DecodedJWT jwtAuth = this.decodedJWT(jwt);
-        List<SimpleGrantedAuthority> authorities = jwtAuth.getClaim("roles").asList(String.class).stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-        return new UsernamePasswordAuthenticationToken(jwtAuth.getClaim("username"), null, authorities);
+    public void authenticate(String jwt) {
+
+        if (this.isValidToken(jwt)){
+            DecodedJWT jwtAuth = this.decodedJWT(jwt);
+
+            List<SimpleGrantedAuthority> authorities = jwtAuth.getClaim("roles").asList(String.class).stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+
+            var user = new UsernamePasswordAuthenticationToken(jwtAuth.getClaim("username"), null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(user);
+        }
+
     }
 
     @Override
@@ -73,8 +80,13 @@ public class JwtUtilImpl implements JwtUtil {
         return LocalDateTime.now().plusHours(24).toInstant(ZoneOffset.of("-03:00"));
     }
 
-    private String getPureToken(String token){
-        return token.replace("Bearer", "").trim();
+    private String getPureToken(String jwt){
+        return jwt.replace("Bearer", "").trim();
+    }
+
+    private void isNull(String jwt){
+        if (jwt == null)
+            throw new NullPointerException("O token está vazio.");
     }
 
 }
