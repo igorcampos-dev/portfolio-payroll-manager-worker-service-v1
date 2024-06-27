@@ -21,7 +21,6 @@
 		<jakarta.validation>3.1.0-M1</jakarta.validation>
 		<nexus.aws.version>main-b57a16ed1e-1</nexus.aws.version>
 		<mysql.connector.version>8.2.0</mysql.connector.version>
-		<com.auth0.version>4.4.0</com.auth0.version>
 	</properties>
 
 	<dependencies>
@@ -52,16 +51,14 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>java-jwt</artifactId>
-			<version>${com.auth0.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 
 		<dependency>

@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.security;
+package com.io.loopit.paysheet.security.config;
 
 import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.security.filter.Filter;
