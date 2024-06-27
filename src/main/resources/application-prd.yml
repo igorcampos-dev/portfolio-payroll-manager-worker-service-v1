@@ -7,6 +7,12 @@ spring:
   application:
     name: loopit.paysheet
 
+jwt:
+  public:
+    key: ${JWT_PUBLIC_KEY}
+  private:
+    key: ${JWT_PRIVATE_KEY}
+
   security:
     jwt:
       signature: ${SIGNATURE}

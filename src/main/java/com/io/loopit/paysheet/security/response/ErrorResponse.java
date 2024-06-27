@@ -30,12 +30,6 @@ public class ErrorResponse {
         this.path = request.getRequestURI();
     }
 
-    public static void getErrorUnauthorized(HttpServletResponse response, HttpServletRequest request){
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        buildResponse(response, "Unauthenticated request.", request);
-    }
-
     public static void getError(HttpServletResponse response, Exception e, HttpServletRequest request){
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
