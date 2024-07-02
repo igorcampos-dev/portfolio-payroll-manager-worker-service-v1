@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
@@ -30,16 +31,15 @@ public class ErrorResponse {
         this.path = request.getRequestURI();
     }
 
+    @SneakyThrows(IOException.class)
     public static void getError(HttpServletResponse response, Exception e, HttpServletRequest request){
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        buildResponse(response, e.getMessage(), request);
-    }
-
-    @SneakyThrows(IOException.class)
-    private static void buildResponse(HttpServletResponse response, String message, HttpServletRequest request){
         objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.writeValue(response.getWriter() ,new ErrorResponse(message, request));
+        objectMapper.writeValue(
+                response.getWriter(),
+                new ErrorResponse(e.getMessage(), request)
+        );
     }
 
 }
