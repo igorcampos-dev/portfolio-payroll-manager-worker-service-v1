@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final PrincipalRepository principalRepository;

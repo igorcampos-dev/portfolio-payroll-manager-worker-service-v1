@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "431d9b21-8263-40d2-ba51-95919a48587a",
+		"_postman_id": "22da5685-5d47-4da5-9778-65fc99d14bdf",
 		"name": "Payroll",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27290769"
 	},
 	"item": [
 		{
-			"name": "Login Admin",
+			"name": "LOGIN ADMIN LOCAL",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/admin/login",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,8 +29,8 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
-						"admin",
+						"v1",
+						"auth",
 						"login"
 					]
 				}
@@ -38,7 +38,7 @@
 			"response": []
 		},
 		{
-			"name": "All Employees Admin",
+			"name": "ALL EMPLOYEES LOCAL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -53,7 +53,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/admin/employees",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/employees",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,8 +61,9 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
+						"v1",
 						"admin",
+						"paycheck",
 						"employees"
 					]
 				}
@@ -70,7 +71,7 @@
 			"response": []
 		},
 		{
-			"name": "Save Payroll Admin",
+			"name": "SAVE PAYROLL ADMIN LOCAL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -102,7 +103,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/admin/{user_id}/{date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/{user_id}/{date=MM-AAAA}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -110,8 +111,9 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
+						"v1",
 						"admin",
+						"paycheck",
 						"{user_id}",
 						"{date=MM-AAAA}"
 					]
@@ -120,7 +122,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Payroll Admin",
+			"name": "UPDATE PAYROLL ADMIN LOCAL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -152,7 +154,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/admin/{user_id}/{date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/{user_id}/{date=MM-AAAA}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -160,8 +162,9 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
+						"v1",
 						"admin",
+						"paycheck",
 						"{user_id}",
 						"{date=MM-AAAA}"
 					]
@@ -170,7 +173,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Payroll Admin",
+			"name": "DELETE PAYROLL ADMIN LOCAL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -203,7 +206,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/admin/{user_id}/{date=MM-AAAA",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/{user_id}/{date=MM-AAAA}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -211,17 +214,18 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
+						"v1",
 						"admin",
+						"paycheck",
 						"{user_id}",
-						"{date=MM-AAAA"
+						"{date=MM-AAAA}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Login Employee",
+			"name": "LOGIN EMPLOYEE LOCAL",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -231,7 +235,8 @@
 					},
 					{
 						"key": "Cookie",
-						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF"
+						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -239,7 +244,7 @@
 					"raw": "{\n    \"cpf\": \"05605662040\",\n    \"password\": \"23097AaQs2\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/employees/login",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -247,8 +252,8 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
-						"employees",
+						"v1",
+						"auth",
 						"login"
 					]
 				}
@@ -256,7 +261,7 @@
 			"response": []
 		},
 		{
-			"name": "All Payroll Employee",
+			"name": "ALL PAYROLL LOCAL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -271,7 +276,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/{user_id}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck/{user_id}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -279,8 +284,8 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
-						"employees",
+						"v1",
+						"employee",
 						"paycheck",
 						"{user_id}"
 					]
@@ -289,7 +294,7 @@
 			"response": []
 		},
 		{
-			"name": "One Payroll Employee",
+			"name": "ONE PAYROLL EMPLOYEE LOCAL",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -299,11 +304,12 @@
 					},
 					{
 						"key": "Cookie",
-						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF"
+						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/{user_id}/{date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck/{user_id}/{date=MM-AAAA}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -311,8 +317,8 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
-						"employees",
+						"v1",
+						"employee",
 						"paycheck",
 						"{user_id}",
 						"{date=MM-AAAA}"
@@ -322,7 +328,7 @@
 			"response": []
 		},
 		{
-			"name": "Validate Employee",
+			"name": "REGISTER EMPLOYEE LOCAL",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -332,7 +338,8 @@
 					},
 					{
 						"key": "Cookie",
-						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF; JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF"
+						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF; JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -340,7 +347,7 @@
 					"raw": "{\n    \"cpf\": \"52686952075\",\n    \"password\": \"23097AaQs2\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/nexus/employees/validate",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/auth/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -348,9 +355,9 @@
 					"port": "8085",
 					"path": [
 						"tech-spring-solutions",
-						"nexus",
-						"employees",
-						"validate"
+						"v1",
+						"auth",
+						"register"
 					]
 				}
 			},

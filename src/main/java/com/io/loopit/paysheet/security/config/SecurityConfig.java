@@ -35,9 +35,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(request ->{
-                        Path.getPermitAllRoutes().forEach(URL -> request.requestMatchers(URL.getMethod(), URL.getRoute()).permitAll());
-                        Path.getHasRoleUserRoutes().forEach( URL -> request.requestMatchers(URL.getMethod(), URL.getRoute()).hasRole("USER"));
-                        Path.getHasRoleAdminRoutes().forEach( URL -> request.requestMatchers(URL.getMethod(), URL.getRoute()).hasRole("ADMIN"));
+                        Path.getPublicRoutes().forEach((key, value) -> request.requestMatchers(value, key).permitAll());
+                        Path.getDefaultPublicRoutes().forEach((key, value) -> request.requestMatchers(value, key).permitAll());
+                        Path.getUserRoutes().forEach((key, value) -> request.requestMatchers(value, key).hasRole("USER"));
+                        Path.getAdminRoutes().forEach((key, value) -> request.requestMatchers(value, key).hasRole("ADMIN"));
                         request.anyRequest().authenticated();
                     })
                     .addFilterBefore(new Filter(jwtUtil) , UsernamePasswordAuthenticationFilter.class);

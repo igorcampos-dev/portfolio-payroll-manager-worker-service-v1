@@ -19,4 +19,5 @@ public class ResponseGeneric {
         String responseBody = OBJECT_MAPPER.writeValueAsString(responseMap);
         return ResponseEntity.status(httpStatus).body(responseBody);
     }
+
 }

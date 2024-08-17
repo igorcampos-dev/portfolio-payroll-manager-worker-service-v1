@@ -87,11 +87,7 @@ A collection com endpoints de exemplos se encontra na pasta `collection` do proj
 
 ## Rotas para Funcionários 👷‍♂️➡️🗺️
 
-### `POST /tech-spring-solutions/nexus/employees/login`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/login' \--header 'Content-Type: application/json' \--data '{"cpf": "CPF_USUARIO_REGISTRADO","password": "SENHA_CRIADA"}'
-```
+### `POST /tech-spring-solutions/v1/auth/login`
 
 Esta rota é utilizada para efetuar o login do funcionário. A existência do funcionário na empresa é verificada com base
 no seu cpf e senha.
@@ -126,11 +122,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 
 ---
 
-### `POST /tech-spring-solutions/nexus/employees/validate`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/validate' \--header 'Content-Type: application/json' \--data '{"cpf": "CPF_FUNCIONARIO EXISTENTE","password": "SENHA_CRIADA"}'
-```
+### `POST /tech-spring-solutions/v1/auth/register`
 
 Nesta rota, o funcionário pode criar sua conta para receber seus contra cheques online. Para isso, ele precisará
 especificar o código do cpf e senha, nesse contexto,as informacões restantes desse usuário serão pegos de uma tabela
@@ -154,11 +146,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer o registro
 
 ---
 
-### `GET /tech-spring-solutions/nexus/paycheck/{userId}`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USUARIO_AQUI' \--header 'Authorization: Bearer SEU_TOKEN_AQUI'
-```
+### `GET /tech-spring-solutions/v1/employee/paycheck/{userId}`
 
 Nesta rota, o ID do funcionário é recebido através da rota e todos os contra cheques são retornados em ordem de data
 para visualização do funcionário. As informações retornadas incluem a data do contra cheque.
@@ -182,14 +170,10 @@ Este é um exemplo de uma tela interativa que permite aos usuários visualizar o
 
 ---
 
-### `GET /tech-spring-solutions/nexus/paycheck/{userId}/{paycheckDate}`
+### `GET /tech-spring-solutions/v1/employee/paycheck/{userId}/{paycheckDate}`
 
 Nesta rota, o ID do funcionário e a data do contra cheque são recebidos. A rota retorna as informações do contra cheque em
 bytes, permitindo que a interface do usuário torne visível o contra cheque do funcionário.
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/paycheck/ID_DO_USARIO/DATA_DO_CONTRACHEQUE' \--header 'Authorization: Bearer TOKEN_AQUI'
-```
 
 <br>
 
@@ -212,11 +196,7 @@ curl --location 'http://localhost:8085/tech-spring-solutions/nexus/employees/pay
 
 ## Rotas para Administradores 🧑‍💼➡️🗺️
 
-### `POST /tech-spring-solutions/nexus/admin/login`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/login' \--header 'Content-Type: application/json' \--data '{"cpf": "58892239090","password": "224654"}'
-```
+### `POST /tech-spring-solutions/v1/auth/login`
 
 Esta rota é utilizada para efetuar o login do administrador. A existência do administrador na empresa é verificada com
 base no seu nome, profissão e senha.
@@ -248,11 +228,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 
 ---
 
-### `POST /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/USER_ID/DATA_DO_CONTRA_CHEQUE' \--header 'Authorization: Bearer TOKEN_AQUI' \--form 'file=@"CAMINHO_DO_ARQUIVO"'
-```
+### `POST /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
 
 `multipart`: contra cheque
 
@@ -278,11 +254,7 @@ Nesta rota, o arquivo do contra cheque é enviado como um multipartFile para o f
 
 ---
 
-### `GET /tech-spring-solutions/nexus/admin/employees`
-
-```bash
-curl --location 'http://localhost:8085/tech-spring-solutions/nexus/admin/employees' \--header 'Authorization: Bearer SEU_TOKEN_AQUI'
-```
+### `GET /tech-spring-solutions/v1/admin/paycheck/employees`
 
 Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno incluirá o ID, nome do funcionário e profissão.
 
@@ -318,11 +290,7 @@ Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno
 
 ---
 
-### `PUT /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
-
-```bash
-curl --location --request PUT 'http://localhost:8085/tech-spring-solutions/nexus/admin/ID_DO_USUARIO/DATA_CONTRACHEQUE' \--header 'Authorization: Bearer TOKEN_BEARER AQUI' \--form 'DIRETORIO_DO_ARQUIVO'
-```
+### `PUT /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
 
 Nesta rota, o ID do funcionário e a data do contra cheque são recebidos, juntamente com um novo arquivo de contra cheque.
 Com base nessas informações, o contra cheque especificado é atualizado.
@@ -345,11 +313,7 @@ Com base nessas informações, o contra cheque especificado é atualizado.
 
 ---
 
-### `DELETE /tech-spring-solutions/nexus/admin/{userId}/{paycheckDate}`
-
-```bash
-curl --location --request DELETE 'http://localhost:8085/tech-spring-solutions/nexus/admin/{ID_DO_USUARIO_AQUI}/{DATA_DO_ARQUIVO}' \--header 'Authorization: Bearer TOKEN_BEARER_ADMIN'
-```
+### `DELETE /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
 
 <br>
 

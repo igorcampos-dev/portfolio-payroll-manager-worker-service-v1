@@ -3,8 +3,6 @@ package com.io.loopit.paysheet.controller;
 import com.io.loopit.paysheet.controller.dto.request.LoginEmployeeDto;
 import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.controller.dto.response.LoginEmployeeResponse;
-import com.io.loopit.paysheet.controller.dto.response.ResponseGeneric;
-import com.io.loopit.paysheet.util.Path;
 import com.io.loopit.paysheet.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AuthenticationEmployeeController {
+@RequestMapping(value = AuthenticationController.PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AuthenticationController {
 
+    public static final String PATH = "/v1/auth";
     private final EmployeeService employeeService;
 
-    @PostMapping(path = Path.POST_LOGIN_EMPLOYEE)
+    @PostMapping(path = "/login")
     public ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
         log.info("iniciou o processo de login de funcionários...");
         LoginEmployeeResponse response = employeeService.login(loginEmployeeDto);
@@ -33,7 +32,7 @@ public class AuthenticationEmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping(path = Path.POST_VALIDATE_EMPLOYEE)
+    @PostMapping(path = "/register")
     public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount(@RequestBody @Valid com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto registerEmployeeDto){
         log.info("iniciou o processo de registro de um funcionário...");
         RegisterEmployeeResponse employee = this.employeeService.register(registerEmployeeDto);

@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class PaycheckEmployeeServiceImpl implements PaycheckEmployeeService {
 
     private final EmployeeRepository employeeRepository;

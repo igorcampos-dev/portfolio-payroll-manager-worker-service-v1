@@ -11,8 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterEmployeeResponse {
-    String name;
-    Profession profession;
-    Integer code;
-    String cpf;
+
+    private String name;
+    private Profession profession;
+    private Integer code;
+    private String cpf;
+
 }

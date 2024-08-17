@@ -17,12 +17,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 
-@RequestMapping(value = Path.DOMAIN, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = PaycheckAdministratorController.PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PaycheckAdministratorController {
 
+    public static final String PATH = "/v1/admin/paycheck";
     private final PaycheckEmployeeService paycheckEmployeeService;
 
-    @PostMapping(path = Path.POST_ADMIN, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/{userId}/{paycheckDate}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> sendPaycheck(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de envio de um contraCheque para a nuvem...");
         paycheckEmployeeService.putFile(file, userId, paycheckDate);
@@ -30,7 +31,7 @@ public class PaycheckAdministratorController {
         return ResponseGeneric.response(HttpStatus.OK, "Arquivo enviado com sucesso");
     }
 
-    @GetMapping(path = Path.GET_EMPLOYEES)
+    @GetMapping(path = "/employees")
     public ResponseEntity<List<AllEmployeesResponse>> allEmployees(){
         log.info("iniciou o processo de busca de todos os funcionários...");
         List<AllEmployeesResponse> response = paycheckEmployeeService.findAllUsersWithBasicInfo();
@@ -38,7 +39,7 @@ public class PaycheckAdministratorController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping(path = Path.PUT_ADMIN, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(path = "/{userId}/{paycheckDate}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updatePaycheckOfUser(@RequestParam("file") MultipartFile file, @PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de atualização de um contraCheque...");
         paycheckEmployeeService.updateFile(file, userId, paycheckDate);
@@ -46,7 +47,7 @@ public class PaycheckAdministratorController {
         return ResponseGeneric.response(HttpStatus.OK, "Arquivo atualizado com sucesso");
     }
 
-    @DeleteMapping(path = Path.DELETE_ADMIN)
+    @DeleteMapping(path = "/{userId}/{paycheckDate}")
     public ResponseEntity<?> deletePaycheckOfUser(@PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de exclusão de um contraCheque");
         paycheckEmployeeService.deletePaycheckById(userId, paycheckDate);

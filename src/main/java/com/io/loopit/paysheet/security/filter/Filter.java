@@ -10,6 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -34,9 +35,11 @@ public class Filter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        return Path.getPermitAllRoutes()
-                   .stream()
-                   .anyMatch(route -> request.getServletPath().contains(route.getRoute()));
+        return Stream.concat(
+                        Path.getDefaultPublicRoutes().keySet().stream(),
+                        Path.getPublicRoutes().keySet().stream()
+                )
+                .anyMatch(route -> request.getServletPath().contains(route));
     }
 
 }

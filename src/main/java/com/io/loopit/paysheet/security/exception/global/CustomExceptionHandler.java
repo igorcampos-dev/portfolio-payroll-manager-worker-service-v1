@@ -6,6 +6,8 @@ import com.nexus.aws.exception.FileNotExists;
 import com.nexus.aws.exception.FolderEmptyException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -56,7 +58,6 @@ public class CustomExceptionHandler {
         return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> methodArgumentInvalidException(MethodArgumentNotValidException e, HttpServletRequest s) {
         log.error("method=MethodArgumentNotValidException | message: {}", e.getMessage());
@@ -93,6 +94,18 @@ public class CustomExceptionHandler {
         String message = "O método de requisição não está disponivel para esse endpoint";
         log.error("method=HttpRequestMethodNotSupportedException | message: {}", message);
         return this.response( message, HttpStatus.INTERNAL_SERVER_ERROR, s.getRequestURI());
+    }
+
+    @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+    public ResponseEntity<Error> invalidDataAccessApiUsageException(HttpServletRequest s, InvalidDataAccessApiUsageException e){
+        log.error("method=InvalidDataAccessApiUsageException | message: {}", e.getMessage());
+        return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
+    }
+
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<Error> duplicateKeyException(HttpServletRequest s, DuplicateKeyException e){
+        log.error("method=DuplicateKeyException | message: {}", e.getMessage());
+        return this.response( e.getMessage(), HttpStatus.CONFLICT, s.getRequestURI());
     }
 
 }
