@@ -19,7 +19,7 @@
 		<java.version>17</java.version>
 		<lombok.version>1.18.30</lombok.version>
 		<jakarta.validation>3.1.0-M1</jakarta.validation>
-		<nexus.aws.version>main-b57a16ed1e-1</nexus.aws.version>
+		<nexus.aws.version>main-037677511b-1</nexus.aws.version>
 		<mysql.connector.version>8.2.0</mysql.connector.version>
 	</properties>
 

@@ -25,10 +25,24 @@ jwt:
     hikari:
       connection-timeout: ${DB_TIMEOUT}
       maximum-pool-size: ${DB_MAXIMUM_POOL_SIZE}
-
-  jpa:
     hibernate:
       ddl-auto: ${DB_DDL_AUTO}
+      show-sql: ${DB_SHOW_SQL}
+
+
+  datasource-secondary:
+    url: ${DB_SECONDARY_URL}
+    username: ${DB_SECONDARY_USER:root}
+    password: ${DB_SECONDARY_PASSWORD}
+    driver-class-name: ${DB_SECONDARY_DRIVER_CLASS}
+    hikari:
+      connection-timeout: ${DB_SECONDARY_TIMEOUT}
+      maximum-pool-size: ${DB_SECONDARY_MAXIMUM_POOL_SIZE}
+    hibernate:
+      ddl-auto: ${DB_SECONDARY_DDL_AUTO}
+      show-sql: ${DB_SECONDARY_SHOW_SQL}
+
+  jpa:
     open-in-view: ${DB_OPEN_VIEW}
 
   aws:
@@ -62,3 +76,5 @@ logging:
     org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: WARN
     org.hibernate.Version: WARN
     org.hibernate.cache.internal.RegionFactoryInitiator: WARN
+    org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo: WARN
+    org.apache.catalina.core.StandardEngine: WARN

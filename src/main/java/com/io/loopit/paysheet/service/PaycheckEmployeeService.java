@@ -10,7 +10,7 @@ public interface PaycheckEmployeeService {
     List<AllEmployeesResponse> findAllUsersWithBasicInfo();
     void updateFile(MultipartFile file, String userId, String paycheckDate);
     void deletePaycheckById(String userId, String paycheckDate);
-    byte[] getContentFile(String userId, String paycheckDate);
+    String getContentFile(String userId, String paycheckDate);
     List<S3File> getPaychecksByUserId(String userId);
     void createFolder(String name);
 }

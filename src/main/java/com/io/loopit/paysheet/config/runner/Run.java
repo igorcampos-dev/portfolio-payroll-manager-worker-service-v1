@@ -1,9 +1,9 @@
 package com.io.loopit.paysheet.config.runner;
 
-import com.io.loopit.paysheet.model.EmployeeEntity;
+import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
 import com.io.loopit.paysheet.model.enums.Profession;
 import com.io.loopit.paysheet.model.enums.UserRole;
-import com.io.loopit.paysheet.repository.EmployeeRepository;
+import com.io.loopit.paysheet.repository.payroll.EmployeeRepository;
 import com.nexus.aws.cloud.S3;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

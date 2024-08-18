@@ -1,6 +1,7 @@
-package com.io.loopit.paysheet.repository;
+package com.io.loopit.paysheet.repository.payroll;
 
-import com.io.loopit.paysheet.model.EmployeeEntity;
+import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Qualifier("employeeRepository")
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Service> {
     Optional<EmployeeEntity> findByCpf(String cpf);
     Optional<EmployeeEntity> findById(String userId);
