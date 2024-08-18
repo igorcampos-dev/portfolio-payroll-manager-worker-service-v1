@@ -17,6 +17,7 @@ services:
       CONTEXT_PATH: /tech-spring-solutions
       SERVER_PORT: 80
       SIGNATURE: CCgbVvfCkAx884yCIadHEOSiO3wOw3AY1OCFvXgwD2TNTxDgTuXi3OrDaH4rzEGS0J6gynpO8K13nT70pbAaDGQdhEOk8G6JRtdz
+
       DB_URL: jdbc:mysql://database:3306/dev?allowPublicKeyRetrieval=true
       DB_USER: root
       DB_PASSWORD: KBf9]xEjq~K
@@ -24,6 +25,15 @@ services:
       DB_TIMEOUT: 30000
       DB_MAXIMUM_POOL_SIZE: 3
       DB_DDL_AUTO: update
+      DB_SHOW_SQL: false
+      DB_SECONDARY_URL: jdbc:mysql://database:3306/rh?allowPublicKeyRetrieval=true
+      DB_SECONDARY_USER: root
+      DB_SECONDARY_PASSWORD: KBf9]xEjq~K
+      DB_SECONDARY_DRIVER_CLASS: com.mysql.cj.jdbc.Driver
+      DB_SECONDARY_TIMEOUT: 30000
+      DB_SECONDARY_MAXIMUM_POOL_SIZE: 3
+      DB_SECONDARY_DDL_AUTO: none
+      DB_SECONDARY_SHOW_SQL: false
       DB_OPEN_VIEW: false
       AWS_ENDPOINT: http://172.18.0.22:3000
       AWS_ACCESS_KEY: S3RVER

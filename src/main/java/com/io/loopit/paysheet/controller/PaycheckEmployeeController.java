@@ -1,5 +1,6 @@
 package com.io.loopit.paysheet.controller;
 
+import com.io.loopit.paysheet.controller.dto.response.Base64Response;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
 import com.nexus.aws.model.S3File;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,12 @@ public class PaycheckEmployeeController {
     }
 
     @GetMapping(path = "/{userId}/{paycheckDate}")
-    public ResponseEntity<byte[]> getPaycheckByUserIdAndPaycheckDate(@PathVariable String userId, @PathVariable String paycheckDate){
+    public ResponseEntity<Base64Response> getPaycheckByUserIdAndPaycheckDate(@PathVariable String userId, @PathVariable String paycheckDate){
         log.info("iniciou o processo de busca de um contraCheque especifico...");
-        byte[] response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
+        String response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
+        var responseRequest = Base64Response.buildBase64(response);
         log.info("processo de busca de um contraCheque especifico finalizado com sucesso.");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(responseRequest);
     }
 
 }

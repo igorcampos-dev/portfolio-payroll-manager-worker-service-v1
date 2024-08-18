@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.model;
+package com.io.loopit.paysheet.model.payroll;
 
 import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.model.enums.Profession;

@@ -4,11 +4,11 @@ CREATE DATABASE dev;
 CREATE DATABASE hml;
 CREATE DATABASE prd;
 CREATE DATABASE locale;
-CREATE DATABASE principal;
+CREATE DATABASE rh;
 
--- Cria a tabela e insere dados da database principal
+-- Cria a tabela e insere dados da database rh
 
-USE principal;
+USE rh;
 
 CREATE TABLE employees (
     id VARCHAR(36) PRIMARY KEY,

@@ -25,10 +25,24 @@ spring:
     hikari:
       connection-timeout: ${DB_TIMEOUT:30000}
       maximum-pool-size: ${DB_MAXIMUM_POOL_SIZE:3}
-
-  jpa:
     hibernate:
       ddl-auto: ${DB_DDL_AUTO:update}
+      show-sql: ${DB_SHOW_SQL:false}
+
+
+  datasource-secondary:
+    url: ${DB_SECONDARY_URL:jdbc:mysql://localhost:3306/rh?allowPublicKeyRetrieval=true}
+    username: ${DB_SECONDARY_USER:root}
+    password: ${DB_SECONDARY_PASSWORD:KBf9]xEjq~K}
+    driver-class-name: ${DB_SECONDARY_DRIVER_CLASS:com.mysql.cj.jdbc.Driver}
+    hikari:
+      connection-timeout: ${DB_SECONDARY_TIMEOUT:30000}
+      maximum-pool-size: ${DB_SECONDARY_MAXIMUM_POOL_SIZE:3}
+    hibernate:
+      ddl-auto: ${DB_SECONDARY_DDL_AUTO:none}
+      show-sql: ${DB_SECONDARY_SHOW_SQL:false}
+
+  jpa:
     open-in-view: ${DB_OPEN_VIEW:false}
 
   autoconfigure:
@@ -41,12 +55,6 @@ spring:
       secretKey: ${AWS_SECRET_KEY:S3RVER}
       region: ${AWS_REGION:us-east-1}
       bucketName: ${AWS_BUCKET_NAME:funcionarios}
-
-enterprise:
-  credential:
-    url: ${ENTERPRISE_URL:jdbc:mysql://localhost:3306/principal?allowPublicKeyRetrieval=true}
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:KBf9]xEjq~K}
 
 logging:
   level:
@@ -62,6 +70,8 @@ logging:
     org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: WARN
     org.hibernate.Version: WARN
     org.hibernate.cache.internal.RegionFactoryInitiator: WARN
+    org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo: WARN
+    org.apache.catalina.core.StandardEngine: WARN
 
 
 

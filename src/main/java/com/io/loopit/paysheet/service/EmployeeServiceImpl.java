@@ -5,10 +5,10 @@ import com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto;
 import com.io.loopit.paysheet.controller.dto.response.LoginEmployeeResponse;
 import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.util.ValidatePasswordUtils;
-import com.io.loopit.paysheet.model.EmployeeEntity;
-import com.io.loopit.paysheet.model.EmployeePrincipalEntity;
-import com.io.loopit.paysheet.repository.EmployeeRepository;
-import com.io.loopit.paysheet.repository.PrincipalRepository;
+import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
+import com.io.loopit.paysheet.model.rh.EmployeeRhEntity;
+import com.io.loopit.paysheet.repository.payroll.EmployeeRepository;
+import com.io.loopit.paysheet.repository.rh.RhRepository;
 import com.io.loopit.paysheet.security.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @SuppressWarnings("unused")
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final PrincipalRepository principalRepository;
+    private final RhRepository rhRepository;
     private final EmployeeRepository employeeRepository;
     private final AuthenticationManager authenticationManager;
     private final PaycheckEmployeeService paycheckEmployeeService;
@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public RegisterEmployeeResponse register(RegisterEmployeeDto registerEmployeeDto) {
         this.employeeRepository.ifUserExistsThrow(registerEmployeeDto.getCpf());
-        EmployeePrincipalEntity employeeProperties = this.getProperties(registerEmployeeDto.getCpf());
+        EmployeeRhEntity employeeProperties = this.getProperties(registerEmployeeDto.getCpf());
         ValidatePasswordUtils.validPass(registerEmployeeDto.getPassword());
         EmployeeEntity employee = this.employeeRepository.save(registerEmployeeDto.toEntity(employeeProperties));
         this.paycheckEmployeeService.createFolder(employee.getName());
@@ -50,8 +50,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return (UserDetails) this.authenticationManager.authenticate(usernamePassword).getPrincipal();
     }
 
-    private EmployeePrincipalEntity getProperties(String cpf) {
-        return this.principalRepository.findDescriptionByCpf(cpf);
+    private EmployeeRhEntity getProperties(String cpf) {
+        return this.rhRepository.findDescriptionByCpf(cpf);
     }
 
 }
