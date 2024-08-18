@@ -24,5 +24,6 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 **/vendor
+**/.idea
 LICENSE
 README.md

@@ -1,6 +1,6 @@
 package com.io.loopit.paysheet.controller.dto.response;
 
-import com.io.loopit.paysheet.model.EmployeeEntity;
+import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
