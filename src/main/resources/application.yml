@@ -13,10 +13,6 @@ spring:
   application:
     name: loopit.paysheet
 
-  security:
-    jwt:
-      signature: ${SIGNATURE:CCgbVvfCkAx884yCIadHEOSiO3wOw3AY1OCFvXgwD2TNTxDgTuXi3OrDaH4rzEGS0J6gynpO8K13nT70pbAaDGQdhEOk8G6JRtdz}
-
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/dev?allowPublicKeyRetrieval=true}
     username: ${DB_USER:root}
@@ -28,7 +24,6 @@ spring:
     hibernate:
       ddl-auto: ${DB_DDL_AUTO:update}
       show-sql: ${DB_SHOW_SQL:false}
-
 
   datasource-secondary:
     url: ${DB_SECONDARY_URL:jdbc:mysql://localhost:3306/rh?allowPublicKeyRetrieval=true}

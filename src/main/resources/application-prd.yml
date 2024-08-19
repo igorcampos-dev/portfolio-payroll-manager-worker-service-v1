@@ -3,19 +3,15 @@ server:
   servlet:
     context-path: ${CONTEXT_PATH}
 
-spring:
-  application:
-    name: loopit.paysheet
-
 jwt:
   public:
     key: ${JWT_PUBLIC_KEY}
   private:
     key: ${JWT_PRIVATE_KEY}
 
-  security:
-    jwt:
-      signature: ${SIGNATURE}
+spring:
+  application:
+    name: loopit.paysheet
 
   datasource:
     url: ${DB_URL}
@@ -28,7 +24,6 @@ jwt:
     hibernate:
       ddl-auto: ${DB_DDL_AUTO}
       show-sql: ${DB_SHOW_SQL}
-
 
   datasource-secondary:
     url: ${DB_SECONDARY_URL}
@@ -55,12 +50,6 @@ jwt:
 
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
-
-enterprise:
-  credential:
-    url: ${ENTERPRISE_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
 
 logging:
   level:
