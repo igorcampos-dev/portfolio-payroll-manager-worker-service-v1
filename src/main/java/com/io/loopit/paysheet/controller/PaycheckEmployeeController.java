@@ -9,9 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @Slf4j
@@ -23,16 +24,21 @@ public class PaycheckEmployeeController {
     public static final String PATH = "/v1/employee/paycheck";
     private final PaycheckEmployeeService paycheckEmployeeService;
 
-    @GetMapping(path = "/{userId}")
-    public ResponseEntity<List<S3File>> getPaychecksByUserId(@PathVariable String userId){
+    @GetMapping(path = "/info-basics")
+    public ResponseEntity<List<S3File>> getPaychecksByUserId(
+            @RequestParam("employeeId") String userId
+    ){
         log.info("iniciou o processo de busca de contraCheques de um funcionário pelo seu Id...");
         List<S3File> response = paycheckEmployeeService.getPaychecksByUserId(userId);
         log.info("processo de busca de contraCheques de um funcionário pelo seu Id finalizado com sucesso.");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping(path = "/{userId}/{paycheckDate}")
-    public ResponseEntity<Base64Response> getPaycheckByUserIdAndPaycheckDate(@PathVariable String userId, @PathVariable String paycheckDate){
+    @GetMapping
+    public ResponseEntity<Base64Response> getPaycheckByUserIdAndPaycheckDate(
+            @RequestParam("employeeId") String userId,
+            @RequestParam("period") String paycheckDate
+    ){
         log.info("iniciou o processo de busca de um contraCheque especifico...");
         String response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
         var responseRequest = Base64Response.buildBase64(response);

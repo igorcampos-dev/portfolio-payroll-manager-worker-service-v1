@@ -1,24 +1,25 @@
-package com.io.loopit.paysheet.util;
+package com.io.loopit.paysheet.security.config;
 
 import org.springframework.http.HttpMethod;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Path {
+public class RoutesConfig {
 
     public static Map<String, HttpMethod> getAdminRoutes(){
         Map<String, HttpMethod> routes = new HashMap<>();
-        routes.put("/v1/admin/paycheck/{userId}/{paycheckDate}", HttpMethod.POST);
+        routes.put("/v1/admin/paycheck", HttpMethod.POST);
         routes.put("/v1/admin/paycheck/employees", HttpMethod.GET);
-        routes.put("/v1/admin/paycheck/{userId}/{paycheckDate}", HttpMethod.PUT);
-        routes.put("/v1/admin/paycheck/{userId}/{paycheckDate}", HttpMethod.DELETE);
+        routes.put("/v1/admin/paycheck", HttpMethod.PUT);
+        routes.put("/v1/admin/paycheck", HttpMethod.DELETE);
         return routes;
     }
 
     public static Map<String, HttpMethod> getUserRoutes(){
         Map<String, HttpMethod> routes = new HashMap<>();
-        routes.put("/v1/employee/paycheck/{userId}", HttpMethod.GET);
-        routes.put("/v1/employee/paycheck/{userId}/{paycheckDate}", HttpMethod.GET);
+        routes.put("/v1/employee/paycheck/info-basics", HttpMethod.GET);
+        routes.put("/v1/employee/paycheck", HttpMethod.GET);
         return routes;
     }
 
