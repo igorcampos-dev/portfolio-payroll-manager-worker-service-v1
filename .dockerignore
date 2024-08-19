@@ -7,6 +7,7 @@
 **/.settings
 **/.toolstarget
 **/.vs
+**/target
 **/.vscode
 **/.next
 **/.cache
@@ -16,7 +17,6 @@
 **/charts
 **/docker-compose*
 **/compose*
-**/target
 **/Dockerfile*
 **/node_modules
 **/npm-debug.log
