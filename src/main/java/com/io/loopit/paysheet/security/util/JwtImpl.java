@@ -10,15 +10,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Component;
+
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Component
 @RequiredArgsConstructor
-@Log4j2
 public class JwtImpl implements JwtUtil {
 
     private static final long EXPIRES_IN = 24L * 60L * 60L;
@@ -30,7 +31,6 @@ public class JwtImpl implements JwtUtil {
 
     @Override
     public void authenticate(String jwt) {
-        System.out.println(JWT_CACHE.size());
         if (this.validToken(jwt)) {
             var decodedJwt = JWT_CACHE.computeIfAbsent(jwt, key -> jwtDecoder.decode(this.pureToken(key)));
 

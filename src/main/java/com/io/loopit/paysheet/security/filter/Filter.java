@@ -1,15 +1,16 @@
 package com.io.loopit.paysheet.security.filter;
 
+import com.io.loopit.paysheet.security.config.RoutesConfig;
 import com.io.loopit.paysheet.security.response.ErrorResponse;
 import com.io.loopit.paysheet.security.util.JwtUtil;
-import com.io.loopit.paysheet.util.Path;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import java.util.stream.Stream;
 
 @Component
@@ -36,8 +37,8 @@ public class Filter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
         return Stream.concat(
-                        Path.getDefaultPublicRoutes().keySet().stream(),
-                        Path.getPublicRoutes().keySet().stream()
+                        RoutesConfig.getDefaultPublicRoutes().keySet().stream(),
+                        RoutesConfig.getPublicRoutes().keySet().stream()
                 )
                 .anyMatch(route -> request.getServletPath().contains(route));
     }
