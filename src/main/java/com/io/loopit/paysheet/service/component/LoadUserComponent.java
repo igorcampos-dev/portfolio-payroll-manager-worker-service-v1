@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class LoadUserComponent implements UserDetailsService {
 
     private final EmployeeRepository userRepository;

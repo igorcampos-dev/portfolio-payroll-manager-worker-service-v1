@@ -4,6 +4,7 @@ import com.io.loopit.paysheet.security.exception.Error;
 import com.nexus.aws.exception.FileAlreadyExistsException;
 import com.nexus.aws.exception.FileNotExists;
 import com.nexus.aws.exception.FolderEmptyException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.impl.InvalidContentTypeException;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,7 +16,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import jakarta.servlet.http.HttpServletRequest;
 
 import java.nio.file.AccessDeniedException;
 import java.time.Instant;
@@ -106,6 +106,12 @@ public class CustomExceptionHandler {
     public ResponseEntity<Error> duplicateKeyException(HttpServletRequest s, DuplicateKeyException e){
         log.error("method=DuplicateKeyException | message: {}", e.getMessage());
         return this.response( e.getMessage(), HttpStatus.CONFLICT, s.getRequestURI());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Error> illegalArgumentException(HttpServletRequest s, IllegalArgumentException e){
+        log.error("method=IllegalArgumentException | message: {}", e.getMessage());
+        return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
 }
