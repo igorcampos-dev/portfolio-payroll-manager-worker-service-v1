@@ -31,7 +31,6 @@ public class Filter extends OncePerRequestFilter {
         } catch (Exception e) {
             ErrorResponse.getError(response, e, request);
         }
-
     }
 
     @Override
