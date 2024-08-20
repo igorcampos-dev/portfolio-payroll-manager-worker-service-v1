@@ -39,4 +39,4 @@ USER appuser
 
 EXPOSE 80
 
-ENTRYPOINT ["wait-for-db.sh", "database:3306", "--", "java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
