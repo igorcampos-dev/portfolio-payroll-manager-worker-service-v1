@@ -27,7 +27,7 @@ spring:
 
   datasource-secondary:
     url: ${DB_SECONDARY_URL}
-    username: ${DB_SECONDARY_USER:root}
+    username: ${DB_SECONDARY_USER}
     password: ${DB_SECONDARY_PASSWORD}
     driver-class-name: ${DB_SECONDARY_DRIVER_CLASS}
     hikari:

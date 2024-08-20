@@ -11,6 +11,7 @@ services:
   server:
     build:
       context: .
+      dockerfile: Dockerfile-local
     ports:
       - 80:80
     environment:
