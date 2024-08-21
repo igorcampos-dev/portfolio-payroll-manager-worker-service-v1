@@ -146,7 +146,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer o registro
 
 ---
 
-### `GET /tech-spring-solutions/v1/employee/paycheck/{userId}`
+### `GET /tech-spring-solutions/v1/employee/paycheck?employeeId={userId}`
 
 Nesta rota, o ID do funcionário é recebido através da rota e todos os contra cheques são retornados em ordem de data
 para visualização do funcionário. As informações retornadas incluem a data do contra cheque.
@@ -170,7 +170,7 @@ Este é um exemplo de uma tela interativa que permite aos usuários visualizar o
 
 ---
 
-### `GET /tech-spring-solutions/v1/employee/paycheck/{userId}/{paycheckDate}`
+### `GET /tech-spring-solutions/v1/employee/paycheck?employeeId={userId}&period={paycheckDate}`
 
 Nesta rota, o ID do funcionário e a data do contra cheque são recebidos. A rota retorna as informações do contra cheque em
 bytes, permitindo que a interface do usuário torne visível o contra cheque do funcionário.
@@ -228,7 +228,7 @@ Este é uma descrição de  uma tela interativa para o usuário fazer login. Ela
 
 ---
 
-### `POST /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
+### `POST /tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={paycheckDate}`
 
 `multipart`: contra cheque
 
@@ -290,7 +290,7 @@ Esta rota é utilizada para obter uma lista de todos os funcionários. O retorno
 
 ---
 
-### `PUT /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
+### `PUT /tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={paycheckDate}`
 
 Nesta rota, o ID do funcionário e a data do contra cheque são recebidos, juntamente com um novo arquivo de contra cheque.
 Com base nessas informações, o contra cheque especificado é atualizado.
@@ -313,7 +313,7 @@ Com base nessas informações, o contra cheque especificado é atualizado.
 
 ---
 
-### `DELETE /tech-spring-solutions/v1/admin/paycheck/{userId}/{paycheckDate}`
+### `DELETE /tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={paycheckDate}`
 
 <br>
 
