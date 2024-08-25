@@ -8,6 +8,7 @@ import com.nexus.aws.cloud.S3;
 import com.nexus.aws.model.S3File;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Base64;
@@ -40,18 +41,12 @@ public class PaycheckEmployeeServiceImpl implements PaycheckEmployeeService {
 
 
     @Override
-    public List<AllEmployeesResponse> findAllUsersWithBasicInfo() {
+    public List<AllEmployeesResponse> findAllUsersWithBasicInfo(int page) {
         log.info("iniciando processo de busca de informações basicas");
-        List<EmployeeEntity> employees = employeeRepository.findAllOrElseThrow();
+        Page<EmployeeEntity> employees = employeeRepository.findAllOrElseThrow(page);
         log.info("processo de busca de informações finalizada com sucesso.");
         return employees.stream()
-                        .map(user ->
-                                AllEmployeesResponse.builder()
-                                                    .id(user.getId())
-                                                    .profession(user.getProfession().name())
-                                                    .name(user.getName())
-                                                    .build()
-                        )
+                        .map(AllEmployeesResponse::toTypeClass)
                         .toList();
     }
 
