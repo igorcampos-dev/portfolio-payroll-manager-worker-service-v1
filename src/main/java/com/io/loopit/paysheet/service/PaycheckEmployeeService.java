@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PaycheckEmployeeService {
     void putFile(MultipartFile file, String userId, String paycheckDate);
-    List<AllEmployeesResponse> findAllUsersWithBasicInfo();
+    List<AllEmployeesResponse> findAllUsersWithBasicInfo(int page);
     void updateFile(MultipartFile file, String userId, String paycheckDate);
     void deletePaycheckById(String userId, String paycheckDate);
     String getContentFile(String userId, String paycheckDate);

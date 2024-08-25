@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 @Slf4j
@@ -55,9 +54,11 @@ public class PaycheckAdministratorController {
             ---
             """)
     @GetMapping(path = "/employees")
-    public ResponseEntity<List<AllEmployeesResponse>> allEmployees(){
+    public ResponseEntity<List<AllEmployeesResponse>> allEmployees(
+            @RequestParam(value = "page", defaultValue = "0") int page
+    ){
         log.info("iniciou o processo de busca de todos os funcionários...");
-        List<AllEmployeesResponse> response = paycheckEmployeeService.findAllUsersWithBasicInfo();
+        List<AllEmployeesResponse> response = paycheckEmployeeService.findAllUsersWithBasicInfo(page);
         log.info("processo de busca de todos os funcionários finalizada com sucesso.");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

@@ -53,10 +53,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/employees",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/employees?page=0",
 					"protocol": "http",
 					"host": [
 						"localhost"
+					],
+					"query": [
+						{
+							"key": "period",
+							"value": "0"
+						}
 					],
 					"port": "8085",
 					"path": [
