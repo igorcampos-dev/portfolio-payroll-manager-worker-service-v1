@@ -10,7 +10,7 @@ CREATE DATABASE rh;
 
 USE rh;
 
-CREATE TABLE employees (
+CREATE TABLE employees_rh (
     id VARCHAR(36) PRIMARY KEY,
     phone_number VARCHAR(20) UNIQUE NOT NULL,
     name VARCHAR(100) UNIQUE NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE employees (
     hire_year INT
 );
 
-INSERT INTO employees (id, phone_number, name, profession, cpf, email, age, code, hire_year) VALUES
+INSERT INTO employees_rh (id, phone_number, name, profession, cpf, email, age, code, hire_year) VALUES
 ('1', '51987654321', 'João Silva', 'CAIXA', '12345678901', 'joao.silva@example.com', 30, 123253, 2015),
 ('2', '51987654322', 'Maria Santos', 'ATENDENTE_DE_BALCAO', '93591582085', 'maria.santos@example.com', 28, 233424, 2016),
 ('3', '51987654323', 'Carlos Oliveira', 'REPOSITOR', '37999816086', 'carlos.oliveira@example.com', 25, 345580, 2017),
