@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @Slf4j
@@ -42,9 +41,11 @@ public class PaycheckEmployeeController {
     public ResponseEntity<List<S3File>> getPaychecksByUserId(
             @RequestParam("employeeId") String userId
     ){
+
         log.info("iniciou o processo de busca de contraCheques de um funcionário pelo seu Id...");
         List<S3File> response = paycheckEmployeeService.getPaychecksByUserId(userId);
         log.info("processo de busca de contraCheques de um funcionário pelo seu Id finalizado com sucesso.");
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -59,10 +60,12 @@ public class PaycheckEmployeeController {
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
+
         log.info("iniciou o processo de busca de um contraCheque especifico...");
         String response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
         var responseRequest = Base64Response.buildBase64(response);
         log.info("processo de busca de um contraCheque especifico finalizado com sucesso.");
+
         return ResponseEntity.status(HttpStatus.OK).body(responseRequest);
     }
 

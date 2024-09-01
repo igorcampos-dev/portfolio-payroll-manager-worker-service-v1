@@ -32,7 +32,6 @@ public class RegisterEmployeeDto {
         return EmployeeEntity.builder()
                 .role(UserRole.USER)
                 .name(employeeProperties.getName())
-                .code(employeeProperties.getCode())
                 .cpf(this.cpf)
                 .password(new BCryptPasswordEncoder().encode(this.password))
                 .profession(Profession.valueOf(employeeProperties.getProfession()))

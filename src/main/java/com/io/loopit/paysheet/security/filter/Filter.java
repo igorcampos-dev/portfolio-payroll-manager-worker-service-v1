@@ -1,8 +1,7 @@
 package com.io.loopit.paysheet.security.filter;
 
-import com.io.loopit.paysheet.security.config.RoutesConfig;
-import com.io.loopit.paysheet.security.response.ErrorResponse;
-import com.io.loopit.paysheet.security.util.JwtUtil;
+import com.io.loopit.paysheet.security.response.FilterResponseError;
+import com.io.loopit.paysheet.security.jwt.JwtAuthentication;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,36 +9,39 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.util.stream.Stream;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
 public class Filter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtUtil;
+    private final JwtAuthentication jwtAuthentication;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) {
-
         try {
+
             String jwt = request.getHeader("Authorization");
-            jwtUtil.authenticate(jwt);
+            jwtAuthentication.authenticate(jwt);
             filterChain.doFilter(request, response);
+
         } catch (Exception e) {
-            ErrorResponse.getError(response, e, request);
+            FilterResponseError
+                    .builder()
+                    .message(e.getMessage())
+                    .path(request.getRequestURI())
+                    .timestamp(LocalDateTime.now())
+                    .build()
+                    .getError(response);
         }
+
     }
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        return Stream.concat(
-                        RoutesConfig.getDefaultPublicRoutes().keySet().stream(),
-                        RoutesConfig.getPublicRoutes().keySet().stream()
-                )
-                .anyMatch(route -> request.getServletPath().contains(route));
+        return request.getServletPath().contains("/v1/auth/");
     }
 
 }
