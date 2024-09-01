@@ -1,6 +1,7 @@
-package com.io.loopit.paysheet.security.exception.global;
+package com.io.loopit.paysheet.exception.global;
 
-import com.io.loopit.paysheet.security.exception.Error;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.io.loopit.paysheet.exception.Error;
 import com.nexus.aws.exception.FileAlreadyExistsException;
 import com.nexus.aws.exception.FileNotExists;
 import com.nexus.aws.exception.FolderEmptyException;
@@ -113,5 +114,12 @@ public class CustomExceptionHandler {
         log.error("method=IllegalArgumentException | message: {}", e.getMessage());
         return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
+
+    @ExceptionHandler(AmazonS3Exception.class)
+    public ResponseEntity<Error> amazonS3Exception(HttpServletRequest s, AmazonS3Exception e){
+        log.error("method=AmazonS3Exception | message: {}", e.getMessage());
+        return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
+    }
+
 
 }

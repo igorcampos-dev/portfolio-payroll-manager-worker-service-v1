@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.controller.swagger;
+package com.io.loopit.paysheet.config.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

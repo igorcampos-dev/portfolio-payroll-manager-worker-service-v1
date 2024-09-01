@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Dockerfile-local
     ports:
-      - 80:80
+      - "80:80"
     environment:
       CONTEXT_PATH: /tech-spring-solutions
       SERVER_PORT: 80
@@ -34,14 +34,14 @@ services:
       DB_SECONDARY_DDL_AUTO: none
       DB_SECONDARY_SHOW_SQL: false
       DB_OPEN_VIEW: false
-      AWS_ENDPOINT: http://172.18.0.22:3000
-      AWS_ACCESS_KEY: S3RVER
-      AWS_SECRET_KEY: S3RVER
-      AWS_REGION: us-east-1
-      AWS_BUCKET_NAME: funcionarios
+      AWS_ENDPOINT: http://s3.amazonaws.com
+      AWS_ACCESS_KEY: YOUR_ACCESS_KEY
+      AWS_SECRET_KEY: YOUR_SECRET_KEY
+      AWS_REGION: YOUR_REGION_HERE
+      AWS_BUCKET_NAME: YOUR_BUCKET_HERE
       SPRING_PROFILES_ACTIVE: prd
-      JWT_PUBLIC_KEY: -----BEGIN PUBLIC KEY----- MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApD8Qvuha9CimRnLfUiZf gy8I3mhsZgmH6rxzGXyQhMfAna7bPXQ/0/6Gs65rHyIJ/8P2twHDRuvi6iBsMrpW JdLkmjOpu/usJ4SKElxlo9yWVdtoCK2Z73ZIM3JaLFLmFt91VHygrsWz6VWfeHDA UYlh3mZdUXAMiHQ/76fchSfn0eHu7b55J7HK6VwZ5CGs8BnryVx1sbEhi5IT8qNQ vs4/qgFwfbtMkqPWZAGAfDf1BBPAo6IStPZyPXej/+Pl4+aA9jyWi/uwHC4RKVUV niWX+AjQXB9iB/zyMeSh9SOKoivjIqct0jGNMHnSpbzY6GvE295yXpIU+G5kiajd EwIDAQAB -----END PUBLIC KEY-----
-      JWT_PRIVATE_KEY: -----BEGIN PRIVATE KEY----- MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkPxC+6Fr0KKZG ct9SJl+DLwjeaGxmCYfqvHMZfJCEx8Cdrts9dD/T/oazrmsfIgn/w/a3AcNG6+Lq IGwyulYl0uSaM6m7+6wnhIoSXGWj3JZV22gIrZnvdkgzclosUuYW33VUfKCuxbPp VZ94cMBRiWHeZl1RcAyIdD/vp9yFJ+fR4e7tvnknscrpXBnkIazwGevJXHWxsSGL khPyo1C+zj+qAXB9u0ySo9ZkAYB8N/UEE8CjohK09nI9d6P/4+Xj5oD2PJaL+7Ac LhEpVRWeJZf4CNBcH2IH/PIx5KH1I4qiK+Mipy3SMY0wedKlvNjoa8Tb3nJekhT4 bmSJqN0TAgMBAAECggEAHAM7jmvfs1vJfCN0bjToPl4Dw7cIoeCHQ2RPty2VEmhl NB+R+em9RyFWhQe+8mjiTrJz/iN5VDvAEFFmUsKQFdRhs+ES1mJmqrjCub3zgd6J 72vD0xMUuZAxYUDkG0IqRwVmo/m7iANlG2tEjwyf6GgnfoBz8wNKx+0XyH6XMEhn bJWZXdmZTFwDCcRW01WNwjVRp1MXteDpUAVsWovg1s3GoVKv+TXqA42FHEKL0p1t 2mX4mnS8ZeT1uXzK0ukxYiXbDPHgXZqx5LZL0D1bWxIWn/AwIy6o71LcgXKBmISJ f9ZbLozmWBD/YTO3rTChrA/bxP8biMW2ZUVq284fIQKBgQDddsTPtC5KZFDeUC+2 x0RQ/ujaSbGyvNwy4S8DMY8eexTt7NB/frSeHdlK2hWN5tn64cDY44caphyyvFyM IJUu4Q7YPBVlp3VXCjL9YITsX9t+p8wuz8TJoIarrOtKqjEJB1eF/ce0CpzlvR9b 2Rm+qdHv5Xc4Eh/9eMmzRjrQ8wKBgQC93BHGSwcUvBabF1C4jIsQ5NtGu9nTpFjo RvKRadLyqIeNYGc5/ap6zIVcw5xy5/kW5JepFswmr5Ojh4HCzioBfu0dY5HDgfWu InpoIsu0Sj8FTpG263ydgw20HYsG5vL2xM2Jy75TZ/mft1nBwIaXXCsNneWVbtod M62Hs1XLYQKBgQC5olJ6n9eld8zpbGFyXjl/gwx/3QHchr40z9huXt5OeHEktjpW hEi1uONpAMDMf1L8HrtdkeqvhcnMcGNK+gzSjMe6rTJqUSHkYaI4DO2ejQMZeWGH Y5TaRXpc8McRgPM1VDgjEoSQ/8xgLlTY0nPoA8T7x2ZVU6wI9XRsl1O5zQKBgDYE ZPI76nnVwcDCc27uXaqi0lhfnev/OGRtuxnwN9peZKKuqO/w4g4qHk90QBDZOx9u TlAHcnIXRjQim6KnMYBXcnMIHzK2yQWQPa9fJwHWlfOWlRKsETpnTQDP3vxJvRrE h44K782fKYBtlBXyBtkNmho3sFhBv8DLMTYIqgJBAoGAHgiEiU+bGB/hHuTN1ANr SJ3SgA0xZvcUz5ZEX1bfhvTP731BMwjrUK0t056JagpoUPZtZyK/eLFuCNBcqLWY SYtytevXud/u3KVpUAfEzrnmMlHunAmTsWbrrFk/HCq9Z+tjhJU4ldkqLm4jwZoO jgPIQeW2jpb4zDmRaFpr0nU= -----END PRIVATE KEY-----
+      JWT_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApD8Qvuha9CimRnLfUiZf gy8I3mhsZgmH6rxzGXyQhMfAna7bPXQ/0/6Gs65rHyIJ/8P2twHDRuvi6iBsMrpW JdLkmjOpu/usJ4SKElxlo9yWVdtoCK2Z73ZIM3JaLFLmFt91VHygrsWz6VWfeHDA UYlh3mZdUXAMiHQ/76fchSfn0eHu7b55J7HK6VwZ5CGs8BnryVx1sbEhi5IT8qNQ vs4/qgFwfbtMkqPWZAGAfDf1BBPAo6IStPZyPXej/+Pl4+aA9jyWi/uwHC4RKVUV niWX+AjQXB9iB/zyMeSh9SOKoivjIqct0jGNMHnSpbzY6GvE295yXpIU+G5kiajd EwIDAQAB
+      JWT_PRIVATE_KEY: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkPxC+6Fr0KKZG ct9SJl+DLwjeaGxmCYfqvHMZfJCEx8Cdrts9dD/T/oazrmsfIgn/w/a3AcNG6+Lq IGwyulYl0uSaM6m7+6wnhIoSXGWj3JZV22gIrZnvdkgzclosUuYW33VUfKCuxbPp VZ94cMBRiWHeZl1RcAyIdD/vp9yFJ+fR4e7tvnknscrpXBnkIazwGevJXHWxsSGL khPyo1C+zj+qAXB9u0ySo9ZkAYB8N/UEE8CjohK09nI9d6P/4+Xj5oD2PJaL+7Ac LhEpVRWeJZf4CNBcH2IH/PIx5KH1I4qiK+Mipy3SMY0wedKlvNjoa8Tb3nJekhT4 bmSJqN0TAgMBAAECggEAHAM7jmvfs1vJfCN0bjToPl4Dw7cIoeCHQ2RPty2VEmhl NB+R+em9RyFWhQe+8mjiTrJz/iN5VDvAEFFmUsKQFdRhs+ES1mJmqrjCub3zgd6J 72vD0xMUuZAxYUDkG0IqRwVmo/m7iANlG2tEjwyf6GgnfoBz8wNKx+0XyH6XMEhn bJWZXdmZTFwDCcRW01WNwjVRp1MXteDpUAVsWovg1s3GoVKv+TXqA42FHEKL0p1t 2mX4mnS8ZeT1uXzK0ukxYiXbDPHgXZqx5LZL0D1bWxIWn/AwIy6o71LcgXKBmISJ f9ZbLozmWBD/YTO3rTChrA/bxP8biMW2ZUVq284fIQKBgQDddsTPtC5KZFDeUC+2 x0RQ/ujaSbGyvNwy4S8DMY8eexTt7NB/frSeHdlK2hWN5tn64cDY44caphyyvFyM IJUu4Q7YPBVlp3VXCjL9YITsX9t+p8wuz8TJoIarrOtKqjEJB1eF/ce0CpzlvR9b 2Rm+qdHv5Xc4Eh/9eMmzRjrQ8wKBgQC93BHGSwcUvBabF1C4jIsQ5NtGu9nTpFjo RvKRadLyqIeNYGc5/ap6zIVcw5xy5/kW5JepFswmr5Ojh4HCzioBfu0dY5HDgfWu InpoIsu0Sj8FTpG263ydgw20HYsG5vL2xM2Jy75TZ/mft1nBwIaXXCsNneWVbtod M62Hs1XLYQKBgQC5olJ6n9eld8zpbGFyXjl/gwx/3QHchr40z9huXt5OeHEktjpW hEi1uONpAMDMf1L8HrtdkeqvhcnMcGNK+gzSjMe6rTJqUSHkYaI4DO2ejQMZeWGH Y5TaRXpc8McRgPM1VDgjEoSQ/8xgLlTY0nPoA8T7x2ZVU6wI9XRsl1O5zQKBgDYE ZPI76nnVwcDCc27uXaqi0lhfnev/OGRtuxnwN9peZKKuqO/w4g4qHk90QBDZOx9u TlAHcnIXRjQim6KnMYBXcnMIHzK2yQWQPa9fJwHWlfOWlRKsETpnTQDP3vxJvRrE h44K782fKYBtlBXyBtkNmho3sFhBv8DLMTYIqgJBAoGAHgiEiU+bGB/hHuTN1ANr SJ3SgA0xZvcUz5ZEX1bfhvTP731BMwjrUK0t056JagpoUPZtZyK/eLFuCNBcqLWY SYtytevXud/u3KVpUAfEzrnmMlHunAmTsWbrrFk/HCq9Z+tjhJU4ldkqLm4jwZoO jgPIQeW2jpb4zDmRaFpr0nU=
     networks:
       - api
 
@@ -57,14 +57,3 @@ services:
       - ./src/main/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - api
-
-  bucket:
-    networks:
-      api:
-        ipv4_address: 172.18.0.22
-    container_name: bucket
-    build:
-      context: ./src/main/docker/bucket
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"

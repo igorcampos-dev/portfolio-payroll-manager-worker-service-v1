@@ -68,15 +68,6 @@ public class EmployeeEntity implements UserDetails {
     private String name;
 
     @Column(
-            name = "code",
-            nullable = false,
-            updatable = false,
-            length = 15
-    )
-    @Comment("Código do funcionário")
-    private Integer code;
-
-    @Column(
             name = "password",
             nullable = false,
             updatable = false
@@ -122,7 +113,6 @@ public class EmployeeEntity implements UserDetails {
         return RegisterEmployeeResponse.builder()
                 .name(this.name)
                 .profession(this.profession)
-                .code(this.code)
                 .cpf(this.cpf)
                 .build();
     }

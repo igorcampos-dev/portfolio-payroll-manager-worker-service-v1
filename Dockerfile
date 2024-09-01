@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y netcat
 USER appuser
 
 COPY --from=build /build/target/*.jar /app/app.jar
-COPY src/main/docker/wait-for-db.sh /usr/local/bin/
+COPY src/main/docker/component/wait-for-db.sh /usr/local/bin/
 
 USER root
 RUN chmod +x /usr/local/bin/wait-for-db.sh

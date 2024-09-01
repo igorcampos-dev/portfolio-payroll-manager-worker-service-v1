@@ -21,15 +21,14 @@ public class Run implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        createEmployeeIfNotFound("05605662040", UserRole.USER, Profession.REPOSITOR, "Igor de campos", 993302);
-        createEmployeeIfNotFound("58892239090", UserRole.ADMIN, Profession.GERENTE_DE_LOJA, "admin", 993303);
+        createEmployeeIfNotFound("05605662040", UserRole.USER, Profession.REPOSITOR, "Igor de campos");
+        createEmployeeIfNotFound("58892239090", UserRole.ADMIN, Profession.GERENTE_DE_LOJA, "admin");
     }
 
-    private void createEmployeeIfNotFound(String cpf, UserRole role, Profession profession, String name, Integer code) {
+    private void createEmployeeIfNotFound(String cpf, UserRole role, Profession profession, String name) {
         if (employeeRepository.findByCpf(cpf).isEmpty()) {
             EmployeeEntity employee = EmployeeEntity.builder()
                     .cpf(cpf)
-                    .code(code)
                     .role(role)
                     .profession(profession)
                     .name(name)

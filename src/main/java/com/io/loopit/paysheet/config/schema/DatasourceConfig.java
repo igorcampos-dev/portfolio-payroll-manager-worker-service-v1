@@ -1,6 +1,6 @@
 package com.io.loopit.paysheet.config.schema;
 
-import com.io.loopit.paysheet.config.schema.prop.PayrollProp;
+import com.io.loopit.paysheet.properties.DatasourceProperties;
 import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
@@ -27,32 +27,37 @@ import java.util.Map;
         transactionManagerRef = "payrollTransactionManager",
         basePackages = "com.io.loopit.paysheet.repository.payroll"
 )
-@SuppressWarnings("unused")
 @RequiredArgsConstructor
-public class PayrollSchemaConfiguration {
+@SuppressWarnings("unused")
+public class DatasourceConfig {
 
-    private final PayrollProp payrollProp;
+    private final DatasourceProperties datasourceProperties;
 
-    @Primary
     @Bean
+    @Primary
     @ConfigurationProperties("spring.datasource")
     public DataSourceProperties payrollProperties(){
         return new DataSourceProperties();
     }
 
-    @Primary
     @Bean
-    public DataSource payroll(@Qualifier("payrollProperties") DataSourceProperties payrollProperties){
+    @Primary
+    public DataSource payroll(
+            @Qualifier("payrollProperties") DataSourceProperties payrollProperties
+    ){
         return payrollProperties.initializeDataSourceBuilder().build();
     }
 
-    @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean payrollFactory(@Qualifier("payroll") DataSource payroll, EntityManagerFactoryBuilder builder){
+    @Primary
+    public LocalContainerEntityManagerFactoryBean payrollFactory(
+            @Qualifier("payroll") DataSource payroll,
+            EntityManagerFactoryBuilder builder
+    ){
 
         Map<String, String> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", payrollProp.getDdlAuto());
-        properties.put("hibernate.show_sql", payrollProp.getShowSql());
+        properties.put("hibernate.hbm2ddl.auto", datasourceProperties.getDdlAuto());
+        properties.put("hibernate.show_sql", datasourceProperties.getShowSql());
 
         return builder.dataSource(payroll)
                       .properties(properties)
@@ -60,9 +65,11 @@ public class PayrollSchemaConfiguration {
                       .build();
     }
 
-    @Primary
     @Bean
-    public PlatformTransactionManager payrollTransactionManager(@Qualifier("payrollFactory") EntityManagerFactory payrollFactory){
+    @Primary
+    public PlatformTransactionManager payrollTransactionManager(
+            @Qualifier("payrollFactory") EntityManagerFactory payrollFactory
+    ){
         return new JpaTransactionManager(payrollFactory);
     }
 

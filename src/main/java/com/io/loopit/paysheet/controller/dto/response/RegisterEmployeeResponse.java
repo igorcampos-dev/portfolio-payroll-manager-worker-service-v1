@@ -14,7 +14,6 @@ public class RegisterEmployeeResponse {
 
     private String name;
     private Profession profession;
-    private Integer code;
     private String cpf;
 
 }

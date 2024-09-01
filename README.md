@@ -33,10 +33,21 @@ A collection com endpoints de exemplos se encontra na pasta `collection` do proj
 
 ### Implantação Local 📍
 
+### ⚠️ Atenção
+
+Para que o projeto funcione, seja localmente ou no Docker, é necessário definir os valores para as variáveis:
+
+- `AWS_ACCESS_KEY`
+- `AWS_SECRET_KEY`
+- `AWS_REGION`
+- `AWS_BUCKET_NAME`
+
+Defina essas variáveis no arquivo `application.yml` se estiver utilizando localmente, ou no arquivo `docker-compose.yml` se estiver utilizando o Docker.
+
+
 1. Execute os seguintes comandos:
    ```bash
-   docker compose up -d mysql-db
-   docker compose up -d aws-s3rver
+   docker compose up -d database
    ```
    
 2. Aguarde até o processo de instalação do docker finalizar, depois,execute o projeto.
