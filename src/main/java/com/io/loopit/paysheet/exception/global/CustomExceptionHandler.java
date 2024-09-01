@@ -1,6 +1,6 @@
-package com.io.loopit.paysheet.security.exception.global;
+package com.io.loopit.paysheet.exception.global;
 
-import com.io.loopit.paysheet.security.exception.Error;
+import com.io.loopit.paysheet.exception.Error;
 import com.nexus.aws.exception.FileAlreadyExistsException;
 import com.nexus.aws.exception.FileNotExists;
 import com.nexus.aws.exception.FolderEmptyException;

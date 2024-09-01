@@ -8,7 +8,7 @@ import com.io.loopit.paysheet.model.payroll.EmployeeEntity;
 import com.io.loopit.paysheet.model.rh.EmployeeRhEntity;
 import com.io.loopit.paysheet.repository.payroll.EmployeeRepository;
 import com.io.loopit.paysheet.repository.rh.RhRepository;
-import com.io.loopit.paysheet.security.util.JwtUtil;
+import com.io.loopit.paysheet.security.jwt.JwtAuthentication;
 import com.io.loopit.paysheet.util.ValidationsUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,13 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final AuthenticationManager authenticationManager;
     private final PaycheckEmployeeService paycheckEmployeeService;
-    private final JwtUtil jwtUtil;
+    private final JwtAuthentication jwtAuthentication;
 
     @Override
     public LoginEmployeeResponse login(LoginEmployeeDto loginEmployeeDto) {
         validationsUtils.validatePassword(loginEmployeeDto.getPassword());
         EmployeeEntity employee = this.employeeRepository.findByCpfOrElseThrow(loginEmployeeDto.getCpf());
-        String token = this.jwtUtil.encode(this.authenticate(loginEmployeeDto));
+        String token = this.jwtAuthentication.encode(this.authenticate(loginEmployeeDto));
         return LoginEmployeeResponse.build(employee, token);
     }
 

@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.config.schema.prop;
+package com.io.loopit.paysheet.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
-@ConfigurationProperties("spring.datasource.hibernate")
-public class PayrollProp {
+@ConfigurationProperties("spring.datasource-secondary.hibernate")
+public class SecondaryDatasourceProperties {
     private String ddlAuto;
     private String showSql;
 }

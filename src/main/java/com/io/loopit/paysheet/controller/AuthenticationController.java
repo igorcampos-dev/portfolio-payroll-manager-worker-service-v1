@@ -40,10 +40,14 @@ public class AuthenticationController {
            
             """)
     @PostMapping(path = "/login")
-    public ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(@RequestBody @Valid LoginEmployeeDto loginEmployeeDto){
+    public ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(
+            @RequestBody @Valid LoginEmployeeDto loginEmployeeDto
+    ){
+
         log.info("iniciou o processo de login de funcionários...");
         LoginEmployeeResponse response = employeeService.login(loginEmployeeDto);
         log.info("processo de login de funcionários finalizado com sucesso.");
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -54,10 +58,14 @@ public class AuthenticationController {
            
             """)
     @PostMapping(path = "/register")
-    public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount(@RequestBody @Valid RegisterEmployeeDto registerEmployeeDto){
+    public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount(
+            @RequestBody @Valid RegisterEmployeeDto registerEmployeeDto
+    ){
+
         log.info("iniciou o processo de registro de um funcionário...");
         RegisterEmployeeResponse employee = this.employeeService.register(registerEmployeeDto);
         log.info("processo de registro de um funcionário finalizado com sucesso.");
+
         return ResponseEntity.status(HttpStatus.CREATED).body(employee);
     }
 

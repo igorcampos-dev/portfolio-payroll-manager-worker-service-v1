@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.security.exception;
+package com.io.loopit.paysheet.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

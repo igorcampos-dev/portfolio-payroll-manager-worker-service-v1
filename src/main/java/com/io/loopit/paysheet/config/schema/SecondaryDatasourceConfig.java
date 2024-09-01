@@ -1,6 +1,6 @@
 package com.io.loopit.paysheet.config.schema;
 
-import com.io.loopit.paysheet.config.schema.prop.RhProp;
+import com.io.loopit.paysheet.properties.SecondaryDatasourceProperties;
 import com.io.loopit.paysheet.model.rh.EmployeeRhEntity;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +26,11 @@ import java.util.Map;
         transactionManagerRef = "rhTransactionManager",
         basePackages = "com.io.loopit.paysheet.repository.rh"
 )
-@SuppressWarnings("unused")
 @RequiredArgsConstructor
-public class RhSchemaConfiguration {
+@SuppressWarnings("unused")
+public class SecondaryDatasourceConfig {
 
-    private final RhProp rhProp;
+    private final SecondaryDatasourceProperties rhConfiguration;
 
     @Bean
     @ConfigurationProperties("spring.datasource-secondary")
@@ -39,16 +39,21 @@ public class RhSchemaConfiguration {
     }
 
     @Bean
-    public DataSource rh(@Qualifier("rhProperties") DataSourceProperties rhProperties){
+    public DataSource rh(
+            @Qualifier("rhProperties") DataSourceProperties rhProperties
+    ){
         return rhProperties.initializeDataSourceBuilder().build();
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean rhFactory(@Qualifier("rh") DataSource rh, EntityManagerFactoryBuilder builder){
+    public LocalContainerEntityManagerFactoryBean rhFactory(
+            @Qualifier("rh") DataSource rh,
+            EntityManagerFactoryBuilder builder)
+    {
 
         Map<String, String> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", rhProp.getDdlAuto());
-        properties.put("hibernate.show_sql", rhProp.getShowSql());
+        properties.put("hibernate.hbm2ddl.auto", rhConfiguration.getDdlAuto());
+        properties.put("hibernate.show_sql", rhConfiguration.getShowSql());
 
         return builder.dataSource(rh)
                       .properties(properties)
@@ -57,7 +62,9 @@ public class RhSchemaConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager rhTransactionManager(@Qualifier("rhFactory") EntityManagerFactory rhFactory){
+    public PlatformTransactionManager rhTransactionManager(
+            @Qualifier("rhFactory") EntityManagerFactory rhFactory
+    ){
         return new JpaTransactionManager(rhFactory);
     }
 

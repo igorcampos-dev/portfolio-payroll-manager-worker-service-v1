@@ -1,7 +1,7 @@
 package com.io.loopit.paysheet.controller;
 
 import com.io.loopit.paysheet.controller.dto.response.AllEmployeesResponse;
-import com.io.loopit.paysheet.controller.dto.response.ResponseGeneric;
+import com.io.loopit.paysheet.controller.dto.response.MessageResponse;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,15 +36,17 @@ public class PaycheckAdministratorController {
             ---
             """)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> sendPaycheck(
+    public ResponseEntity<MessageResponse> sendPaycheck(
             @RequestParam("file") MultipartFile file,
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
+
         log.info("iniciou o processo de envio de um contraCheque para a nuvem...");
         paycheckEmployeeService.putFile(file, userId, paycheckDate);
         log.info("processo de envio de contraCheque para nuvem finalizado com sucesso.");
-        return ResponseGeneric.response(HttpStatus.OK, "Arquivo enviado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.build("Arquivo enviado com sucesso"));
     }
 
     @SecurityRequirement(name = "Bearer Authentication")
@@ -57,9 +59,11 @@ public class PaycheckAdministratorController {
     public ResponseEntity<List<AllEmployeesResponse>> allEmployees(
             @RequestParam(value = "page", defaultValue = "0") int page
     ){
+
         log.info("iniciou o processo de busca de todos os funcionários...");
         List<AllEmployeesResponse> response = paycheckEmployeeService.findAllUsersWithBasicInfo(page);
         log.info("processo de busca de todos os funcionários finalizada com sucesso.");
+
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -70,15 +74,17 @@ public class PaycheckAdministratorController {
             ---
             """)
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> updatePaycheckOfUser(
+    public ResponseEntity<MessageResponse> updatePaycheckOfUser(
             @RequestParam("file") MultipartFile file,
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
+
         log.info("iniciou o processo de atualização de um contraCheque...");
         paycheckEmployeeService.updateFile(file, userId, paycheckDate);
         log.info("processo de atualização de um contraCheque finalizado com sucesso.");
-        return ResponseGeneric.response(HttpStatus.OK, "Arquivo atualizado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.build("Arquivo atualizado com sucesso"));
     }
 
     @SecurityRequirement(name = "Bearer Authentication")
@@ -96,6 +102,7 @@ public class PaycheckAdministratorController {
         log.info("iniciou o processo de exclusão de um contraCheque");
         paycheckEmployeeService.deletePaycheckById(userId, paycheckDate);
         log.info("processo de exclusão de um contraCheque finalizado com sucesso.");
-        return ResponseGeneric.response(HttpStatus.OK, "Arquivo deletado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body("Arquivo deletado com sucesso");
     }
 }

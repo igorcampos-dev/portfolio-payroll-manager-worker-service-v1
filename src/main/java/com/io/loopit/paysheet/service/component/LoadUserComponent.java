@@ -16,11 +16,8 @@ public class LoadUserComponent implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String cpf){
-        return this.findByEmail(cpf);
-    }
-
-    public UserDetails findByEmail(String cpf) {
         var user = this.userRepository.findByCpfOrElseThrow(cpf);
         return new User(user.getCpf(), user.getPassword(), user.getAuthorities());
     }
+
 }
