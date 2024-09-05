@@ -9,7 +9,7 @@ import com.io.loopit.paysheet.model.rh.EmployeeRhEntity;
 import com.io.loopit.paysheet.repository.payroll.EmployeeRepository;
 import com.io.loopit.paysheet.repository.rh.RhRepository;
 import com.io.loopit.paysheet.security.jwt.JwtAuthentication;
-import com.io.loopit.paysheet.util.ValidationsUtils;
+import com.io.loopit.paysheet.util.ValidationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 @SuppressWarnings("unused")
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final ValidationsUtils validationsUtils;
     private final RhRepository rhRepository;
     private final EmployeeRepository employeeRepository;
     private final AuthenticationManager authenticationManager;
@@ -30,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public LoginEmployeeResponse login(LoginEmployeeDto loginEmployeeDto) {
-        validationsUtils.validatePassword(loginEmployeeDto.getPassword());
         EmployeeEntity employee = this.employeeRepository.findByCpfOrElseThrow(loginEmployeeDto.getCpf());
         String token = this.jwtAuthentication.encode(this.authenticate(loginEmployeeDto));
         return LoginEmployeeResponse.build(employee, token);
@@ -38,7 +36,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public RegisterEmployeeResponse register(RegisterEmployeeDto registerEmployeeDto) {
-        validationsUtils.validatePassword(registerEmployeeDto.getPassword());
         this.employeeRepository.ifUserExistsThrow(registerEmployeeDto.getCpf());
         EmployeeRhEntity entity = this.rhRepository.findDescriptionByCpf(registerEmployeeDto.getCpf());
         EmployeeEntity employee = this.employeeRepository.save(registerEmployeeDto.toEntity(entity));
