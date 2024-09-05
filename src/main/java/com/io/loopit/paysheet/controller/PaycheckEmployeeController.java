@@ -2,6 +2,7 @@ package com.io.loopit.paysheet.controller;
 
 import com.io.loopit.paysheet.controller.dto.response.Base64Response;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
+import com.io.loopit.paysheet.util.ValidationUtils;
 import com.nexus.aws.model.S3File;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,11 +39,12 @@ public class PaycheckEmployeeController {
             ---
             """)
     @GetMapping(path = "/info-basics")
-    public ResponseEntity<List<S3File>> getPaychecksByUserId(
+    public ResponseEntity<List<S3File>> getPaychecksByUserId (
             @RequestParam("employeeId") String userId
     ){
 
         log.info("iniciou o processo de busca de contraCheques de um funcionário pelo seu Id...");
+        ValidationUtils.validateUuid(userId);
         List<S3File> response = paycheckEmployeeService.getPaychecksByUserId(userId);
         log.info("processo de busca de contraCheques de um funcionário pelo seu Id finalizado com sucesso.");
 
@@ -56,12 +58,13 @@ public class PaycheckEmployeeController {
             ---
             """)
     @GetMapping
-    public ResponseEntity<Base64Response> getPaycheckByUserIdAndPaycheckDate(
+    public ResponseEntity<Base64Response> getPaycheckByUserIdAndPaycheckDate (
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
 
         log.info("iniciou o processo de busca de um contraCheque especifico...");
+        ValidationUtils.validateGetAction(userId, paycheckDate);
         String response = paycheckEmployeeService.getContentFile(userId, paycheckDate);
         var responseRequest = Base64Response.buildBase64(response);
         log.info("processo de busca de um contraCheque especifico finalizado com sucesso.");

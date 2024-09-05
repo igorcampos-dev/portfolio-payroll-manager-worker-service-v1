@@ -5,6 +5,7 @@ import com.io.loopit.paysheet.controller.dto.request.RegisterEmployeeDto;
 import com.io.loopit.paysheet.controller.dto.response.RegisterEmployeeResponse;
 import com.io.loopit.paysheet.controller.dto.response.LoginEmployeeResponse;
 import com.io.loopit.paysheet.service.EmployeeService;
+import com.io.loopit.paysheet.util.ValidationUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,11 +41,12 @@ public class AuthenticationController {
            
             """)
     @PostMapping(path = "/login")
-    public ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin(
+    public ResponseEntity<LoginEmployeeResponse> authenticateEmployeeLogin (
             @RequestBody @Valid LoginEmployeeDto loginEmployeeDto
     ){
 
         log.info("iniciou o processo de login de funcionários...");
+        ValidationUtils.validatePassword(loginEmployeeDto.getPassword());
         LoginEmployeeResponse response = employeeService.login(loginEmployeeDto);
         log.info("processo de login de funcionários finalizado com sucesso.");
 
@@ -58,11 +60,12 @@ public class AuthenticationController {
            
             """)
     @PostMapping(path = "/register")
-    public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount(
+    public ResponseEntity<RegisterEmployeeResponse> registerEmployeeAccount (
             @RequestBody @Valid RegisterEmployeeDto registerEmployeeDto
     ){
 
         log.info("iniciou o processo de registro de um funcionário...");
+        ValidationUtils.validatePassword(registerEmployeeDto.getPassword());
         RegisterEmployeeResponse employee = this.employeeService.register(registerEmployeeDto);
         log.info("processo de registro de um funcionário finalizado com sucesso.");
 

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "22da5685-5d47-4da5-9778-65fc99d14bdf",
+		"_postman_id": "2a936d95-a9f9-46f0-812e-41abde94e0a3",
 		"name": "Payroll",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27290769"
@@ -41,28 +41,21 @@
 			"name": "ALL EMPLOYEES LOCAL",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "SEU_TOKEN_AQUI",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer SEU_TOKEN_AQUI",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/employees?page=0",
 					"protocol": "http",
 					"host": [
 						"localhost"
-					],
-					"query": [
-						{
-							"key": "period",
-							"value": "0"
-						}
 					],
 					"port": "8085",
 					"path": [
@@ -71,6 +64,12 @@
 						"admin",
 						"paycheck",
 						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
 					]
 				}
 			},
@@ -84,11 +83,6 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					},
-					{
-						"key": "Cookie",
-						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF",
-						"disabled": true
 					}
 				],
 				"body": {
@@ -120,11 +114,6 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json"
-					},
-					{
-						"key": "Cookie",
-						"value": "JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF; JSESSIONID=9AD416A9ACC6B36CBD4A5A13734AC5BF",
-						"disabled": true
 					}
 				],
 				"body": {
@@ -152,23 +141,33 @@
 			"name": "DELETE PAYROLL ADMIN LOCAL",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TOKEN_AQUI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
 						{
-							"key": "token",
-							"value": "SEU_TOKEN_AQUI",
-							"type": "string"
+							"key": "employeeId",
+							"value": "ID_AQUI",
+							"type": "text"
+						},
+						{
+							"key": "period",
+							"value": "PERIODO_AQUI(MM-AAAA)",
+							"type": "text"
 						}
 					]
 				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -179,16 +178,6 @@
 						"v1",
 						"admin",
 						"paycheck"
-					],
-					"query": [
-						{
-							"key": "employeeId",
-							"value": "{userId}"
-						},
-						{
-							"key": "period",
-							"value": "{date=MM-AAAA}"
-						}
 					]
 				}
 			},
@@ -198,29 +187,38 @@
 			"name": "UPDATE PAYROLL ADMIN LOCAL",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TOKEN_AQUI",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "file",
 							"type": "file",
-							"src": "SEU_ARQUIVO_AQUI"
+							"src": "ARQUIVO_CURRICULO_AQUI"
+						},
+						{
+							"key": "employeeId",
+							"value": "ID_AQUI",
+							"type": "text"
+						},
+						{
+							"key": "period",
+							"value": "PERIODO_AQUI(MM-AAAA)",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck/employees?page=0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -230,68 +228,13 @@
 						"tech-spring-solutions",
 						"v1",
 						"admin",
-						"paycheck"
+						"paycheck",
+						"employees"
 					],
 					"query": [
 						{
-							"key": "employeeId",
-							"value": "{userId}"
-						},
-						{
-							"key": "period",
-							"value": "{date=MM-AAAA}"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SAVE PAYROLL LOCAL",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "SEU_TOKEN_AQUI",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "SEU_ARQUIVO_AQUI"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck?employeeId={userId}&period={date=MM-AAAA}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8085",
-					"path": [
-						"tech-spring-solutions",
-						"v1",
-						"admin",
-						"paycheck"
-					],
-					"query": [
-						{
-							"key": "employeeId",
-							"value": "{userId}"
-						},
-						{
-							"key": "period",
-							"value": "{date=MM-AAAA}"
+							"key": "page",
+							"value": "0"
 						}
 					]
 				}
@@ -300,16 +243,34 @@
 		},
 		{
 			"name": "ONE PAYROLL EMPLOYEE LOCAL",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer SEU_TOKEN_AQUI"
+						"value": "Bearer TOKEN_AQUI"
 					}
 				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "employeeId",
+							"value": "ID_AQUI",
+							"type": "text"
+						},
+						{
+							"key": "period",
+							"value": "PERIODO_AQUI(MM-AAAA)",
+							"type": "text"
+						}
+					]
+				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck?employeeId={userId}&period={date=MM-AAAA}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -320,16 +281,57 @@
 						"v1",
 						"employee",
 						"paycheck"
-					],
-					"query": [
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAVE PAYROLL LOCAL",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TOKEN_AQUI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "ARQUIVO_CURRICULO_AQUI"
+						},
 						{
 							"key": "employeeId",
-							"value": "{userId}"
+							"value": "ID_AQUI",
+							"type": "text"
 						},
 						{
 							"key": "period",
-							"value": "{date=MM-AAAA}"
+							"value": "PERIODO_AQUI(MM-AAAA)",
+							"type": "text"
 						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/admin/paycheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"tech-spring-solutions",
+						"v1",
+						"admin",
+						"paycheck"
 					]
 				}
 			},
@@ -342,23 +344,28 @@
 			},
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TOKEN_AQUI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
 						{
-							"key": "token",
-							"value": "SEU_TOKEN_AQUI",
-							"type": "string"
+							"key": "employeeId",
+							"value": "ID_AQUI",
+							"type": "text"
 						}
 					]
 				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "file",
-					"file": {}
-				},
 				"url": {
-					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck/info-basics?employeeId={userId}",
+					"raw": "http://localhost:8085/tech-spring-solutions/v1/employee/paycheck/info-basics",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -370,12 +377,6 @@
 						"employee",
 						"paycheck",
 						"info-basics"
-					],
-					"query": [
-						{
-							"key": "employeeId",
-							"value": "{userId}"
-						}
 					]
 				}
 			},

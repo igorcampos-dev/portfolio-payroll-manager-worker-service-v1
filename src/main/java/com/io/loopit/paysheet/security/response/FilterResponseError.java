@@ -3,7 +3,6 @@ package com.io.loopit.paysheet.security.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
