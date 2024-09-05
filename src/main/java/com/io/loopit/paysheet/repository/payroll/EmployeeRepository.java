@@ -15,6 +15,12 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Servic
     Optional<EmployeeEntity> findByCpf(String cpf);
     Optional<EmployeeEntity> findById(String userId);
 
+    default void ifUserExistsByIdThrow(String id){
+        if (this.findById(id).isEmpty()){
+            throw new NullPointerException("Não existe um usuário com esse id");
+        }
+    }
+
     default EmployeeEntity findByCpfOrElseThrow(String cpf){
         return this.findByCpf(cpf).orElseThrow(() -> new NullPointerException("Usuário não existe com esse cpf."));
     }
@@ -37,4 +43,5 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Servic
         }
         return employeeEntities;
     }
+
 }

@@ -3,6 +3,7 @@ package com.io.loopit.paysheet.controller;
 import com.io.loopit.paysheet.controller.dto.response.AllEmployeesResponse;
 import com.io.loopit.paysheet.controller.dto.response.MessageResponse;
 import com.io.loopit.paysheet.service.PaycheckEmployeeService;
+import com.io.loopit.paysheet.util.ValidationUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -36,13 +37,14 @@ public class PaycheckAdministratorController {
             ---
             """)
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<MessageResponse> sendPaycheck(
+    public ResponseEntity<MessageResponse> sendPaycheck (
             @RequestParam("file") MultipartFile file,
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
 
         log.info("iniciou o processo de envio de um contraCheque para a nuvem...");
+        ValidationUtils.validatePostAction(userId, paycheckDate, file.getContentType());
         paycheckEmployeeService.putFile(file, userId, paycheckDate);
         log.info("processo de envio de contraCheque para nuvem finalizado com sucesso.");
 
@@ -74,13 +76,14 @@ public class PaycheckAdministratorController {
             ---
             """)
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<MessageResponse> updatePaycheckOfUser(
+    public ResponseEntity<MessageResponse> updatePaycheckOfUser (
             @RequestParam("file") MultipartFile file,
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
 
         log.info("iniciou o processo de atualização de um contraCheque...");
+        ValidationUtils.validatePutAction(userId, paycheckDate, file.getContentType());
         paycheckEmployeeService.updateFile(file, userId, paycheckDate);
         log.info("processo de atualização de um contraCheque finalizado com sucesso.");
 
@@ -94,15 +97,16 @@ public class PaycheckAdministratorController {
             ---
             """)
     @DeleteMapping
-    public ResponseEntity<?> deletePaycheckOfUser(
+    public ResponseEntity<MessageResponse> deletePaycheckOfUser (
             @RequestParam("employeeId") String userId,
             @RequestParam("period") String paycheckDate
     ){
 
         log.info("iniciou o processo de exclusão de um contraCheque");
+        ValidationUtils.validateDeleteAction(userId, paycheckDate);
         paycheckEmployeeService.deletePaycheckById(userId, paycheckDate);
         log.info("processo de exclusão de um contraCheque finalizado com sucesso.");
 
-        return ResponseEntity.status(HttpStatus.OK).body("Arquivo deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.OK).body(MessageResponse.build("Arquivo deletado com sucesso"));
     }
 }
