@@ -11,13 +11,13 @@ import org.junit.runner.RunWith;
 public class AuthenticationControllerTest {
 
     @Test
-    @Scenario("integration_tests/authentication/case_without_bearer_token_login.json")
-    public void withoutBearerTokenLogin() throws Exception {
+    @Scenario("integration_tests/authentication/case_login_ok.json")
+    public void loginOk() throws Exception {
     }
 
     @Test
-    @Scenario("integration_tests/authentication/case_without_bearer_token_register.json")
-    public void withoutBearerTokenRegister() throws Exception {
+    @Scenario("integration_tests/authentication/case_register_ok.json")
+    public void registerOk() throws Exception {
     }
 
 
