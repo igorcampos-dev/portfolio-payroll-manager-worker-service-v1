@@ -1,0 +1,20 @@
+{
+  "scenarioName": "Faz um teste básico no login",
+  "steps": [
+
+    {
+      "name": "create_customer",
+      "url": "/tech-spring-solutions/v1/auth/register",
+      "method": "POST",
+      "request": {
+        "cpf": "77086739090",
+        "password": "PASSWORD1234"
+      },
+      "verify": {
+        "status": 403,
+        "body": {}
+      }
+    }
+
+  ]
+}
