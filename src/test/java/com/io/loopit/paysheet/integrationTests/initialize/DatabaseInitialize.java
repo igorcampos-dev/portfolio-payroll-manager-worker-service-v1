@@ -1,4 +1,4 @@
-package com.io.loopit.paysheet.integrationTests.mock.employees;
+package com.io.loopit.paysheet.integrationTests.initialize;
 
 import com.io.loopit.paysheet.model.enums.Profession;
 import com.io.loopit.paysheet.model.enums.UserRole;

@@ -11,14 +11,32 @@ import org.junit.runner.RunWith;
 public class AuthenticationControllerTest {
 
     @Test
-    @Scenario("integration_tests/authentication/case_login_ok.json")
-    public void loginOk() throws Exception {
+    @Scenario("integration_tests/authentication/login/case_login_ok.json")
+    public void loginOk() {
     }
 
     @Test
-    @Scenario("integration_tests/authentication/case_register_ok.json")
-    public void registerOk() throws Exception {
+    @Scenario("integration_tests/authentication/login/case_login_invalid_password.json")
+    public void invalidPassword() {
+
     }
 
+    @Test
+    @Scenario("integration_tests/authentication/login/case_login_employee_not_exists.json")
+    public void employeeNotExists(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/login/case_login_fields_empty.json")
+    public void fieldsEmpty(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/login/case_login_fields_null.json")
+    public void fieldsNull(){
+
+    }
 
 }

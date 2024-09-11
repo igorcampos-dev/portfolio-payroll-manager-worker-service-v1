@@ -13,6 +13,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.file.AccessDeniedException;
 import java.time.Instant;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -44,7 +46,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<Error> handleNullPointerException(NullPointerException e, HttpServletRequest s) {
         log.error("method=NullPointerException | message: {}", e.getMessage());
-        return this.response(e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
+        return this.response(e.getMessage(), HttpStatus.NOT_FOUND, s.getRequestURI());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
@@ -62,8 +64,12 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> methodArgumentInvalidException(MethodArgumentNotValidException e, HttpServletRequest s) {
         log.error("method=MethodArgumentNotValidException | message: {}", e.getMessage());
-        String defaultMessage = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-        return this.response(defaultMessage, HttpStatus.BAD_REQUEST, s.getRequestURI());
+        var errorsMessage = e.getBindingResult().getAllErrors().stream().map(error -> {
+            String field = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            return field + " " + errorMessage;
+        }).collect(Collectors.joining(", "));
+        return this.response(errorsMessage, HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
     @ExceptionHandler(FolderEmptyException.class)
@@ -121,5 +127,10 @@ public class CustomExceptionHandler {
         return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Error> exception(HttpServletRequest s, Exception e){
+        log.error("method=Exception | message: {}", e.getMessage());
+        return this.response( e.getMessage(), HttpStatus.BAD_REQUEST, s.getRequestURI());
+    }
 
 }

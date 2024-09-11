@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz login com credenciais de um funcionário que não existe",
+  "steps": [
+
+    {
+      "name": "user_not_exists",
+      "url": "/tech-spring-solutions/v1/auth/login",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "04749284033",
+          "password": "TEST_ALEATORY"
+        }
+      },
+      "verify": {
+        "status": 404,
+        "body": {
+          "timestamp" : "$NOT.NULL",
+          "status" : 404,
+          "message" : "Usuário não existe com esse cpf.",
+          "path" : "/tech-spring-solutions/v1/auth/login"
+        }
+      }
+
+    }
+
+  ]
+}

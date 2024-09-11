@@ -3,7 +3,7 @@
   "steps": [
 
     {
-      "name": "create_customer",
+      "name": "login_ok",
       "url": "/tech-spring-solutions/v1/auth/login",
       "method": "POST",
       "request": {

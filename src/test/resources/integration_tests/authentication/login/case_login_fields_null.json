@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz login com credenciais vazias",
+  "steps": [
+
+    {
+      "name": "invalid_user_empty",
+      "url": "/tech-spring-solutions/v1/auth/login",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": null,
+          "password": null
+        }
+      },
+      "verify": {
+        "status": 400,
+        "body": {
+          "timestamp" : "$NOT.NULL",
+          "status" : 400,
+          "message" : "$NOT.NULL",
+          "path" : "/tech-spring-solutions/v1/auth/login"
+        }
+      }
+
+    }
+
+  ]
+}
