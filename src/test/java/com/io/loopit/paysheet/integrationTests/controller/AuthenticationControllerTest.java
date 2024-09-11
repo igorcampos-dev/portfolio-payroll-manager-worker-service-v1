@@ -39,4 +39,16 @@ public class AuthenticationControllerTest {
 
     }
 
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_ok.json")
+    public void registerOk(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_employee_not_found.json")
+    public void employeeNotFound(){
+
+    }
+
 }

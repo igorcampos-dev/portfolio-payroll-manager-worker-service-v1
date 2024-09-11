@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public RegisterEmployeeResponse register(RegisterEmployeeDto registerEmployeeDto) {
         this.employeeRepository.ifUserExistsThrow(registerEmployeeDto.getCpf());
-        EmployeeRhEntity entity = this.rhRepository.findDescriptionByCpf(registerEmployeeDto.getCpf());
+        EmployeeRhEntity entity = this.rhRepository.findByCpfOrElseThrow(registerEmployeeDto.getCpf());
         EmployeeEntity employee = this.employeeRepository.save(registerEmployeeDto.toEntity(entity));
         return employee.toRegisterResponse();
     }
