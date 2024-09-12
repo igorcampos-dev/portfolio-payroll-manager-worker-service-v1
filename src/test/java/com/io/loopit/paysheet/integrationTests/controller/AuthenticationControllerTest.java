@@ -17,25 +17,31 @@ public class AuthenticationControllerTest {
 
     @Test
     @Scenario("integration_tests/authentication/login/case_login_invalid_password.json")
-    public void invalidPassword() {
+    public void loginInvalidPassword() {
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/login/case_login_invalid_cpf.json")
+    public void loginInvalidCpf() {
 
     }
 
     @Test
     @Scenario("integration_tests/authentication/login/case_login_employee_not_exists.json")
-    public void employeeNotExists(){
+    public void loginEmployeeNotExists(){
 
     }
 
     @Test
     @Scenario("integration_tests/authentication/login/case_login_fields_empty.json")
-    public void fieldsEmpty(){
+    public void fieldsLoginEmpty(){
 
     }
 
     @Test
     @Scenario("integration_tests/authentication/login/case_login_fields_null.json")
-    public void fieldsNull(){
+    public void fieldsLoginNull(){
 
     }
 
@@ -48,6 +54,30 @@ public class AuthenticationControllerTest {
     @Test
     @Scenario("integration_tests/authentication/register/case_register_employee_not_found.json")
     public void employeeNotFound(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_fields_null.json")
+    public void fieldsRegisterNull(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_fields_empty.json")
+    public void fieldsRegisterEmpty(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_invalid_password.json")
+    public void registerInvalidPassword(){
+
+    }
+
+    @Test
+    @Scenario("integration_tests/authentication/register/case_register_invalid_cpf.json")
+    public void registerInvalidCpf(){
 
     }
 

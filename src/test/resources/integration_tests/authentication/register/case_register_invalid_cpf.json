@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz um teste de registro com um cpf inválido",
+  "steps": [
+
+    {
+      "name": "invalid_cpf",
+      "url": "/tech-spring-solutions/v1/auth/register",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "000000000000",
+          "password": "TEST"
+        }
+      },
+      "verify": {
+        "status": 400,
+        "body": {
+          "timestamp" : "$NOT.NULL",
+          "status" : 400,
+          "message" : "cpf : Cpf inválido",
+          "path" : "/tech-spring-solutions/v1/auth/register"
+        }
+      }
+
+    }
+
+  ]
+}

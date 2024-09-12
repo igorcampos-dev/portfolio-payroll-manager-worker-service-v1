@@ -1,15 +1,15 @@
 {
-  "scenarioName": "Faz login com credenciais vazias",
+  "scenarioName": "Faz login com um cpf inválido",
   "steps": [
 
     {
-      "name": "invalid_user_null",
+      "name": "invalid_cpf",
       "url": "/tech-spring-solutions/v1/auth/login",
       "method": "POST",
       "request": {
         "body": {
-          "cpf": null,
-          "password": null
+          "cpf": "00000000000",
+          "password": "TEST1234567"
         }
       },
       "verify": {
@@ -17,7 +17,7 @@
         "body": {
           "timestamp" : "$NOT.NULL",
           "status" : 400,
-          "message" : "$NOT.NULL",
+          "message" : "cpf : Cpf inválido",
           "path" : "/tech-spring-solutions/v1/auth/login"
         }
       }

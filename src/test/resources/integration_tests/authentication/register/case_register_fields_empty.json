@@ -1,15 +1,15 @@
 {
-  "scenarioName": "Faz login com credenciais vazias",
+  "scenarioName": "Faz registro com credenciais vazias",
   "steps": [
 
     {
-      "name": "invalid_user_null",
-      "url": "/tech-spring-solutions/v1/auth/login",
+      "name": "invalid_employee_empty",
+      "url": "/tech-spring-solutions/v1/auth/register",
       "method": "POST",
       "request": {
         "body": {
-          "cpf": null,
-          "password": null
+          "cpf": "",
+          "password": ""
         }
       },
       "verify": {
@@ -18,7 +18,7 @@
           "timestamp" : "$NOT.NULL",
           "status" : 400,
           "message" : "$NOT.NULL",
-          "path" : "/tech-spring-solutions/v1/auth/login"
+          "path" : "/tech-spring-solutions/v1/auth/register"
         }
       }
 

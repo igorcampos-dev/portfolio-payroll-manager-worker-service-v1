@@ -19,13 +19,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @NoArgsConstructor
 public class RegisterEmployeeDto {
 
-    @NotNull(message = "O cpf não pode ser nulo")
-    @NotEmpty(message = "O cpf não pode ser vazio")
-    @CPF(message = "Cpf inválido")
+    @NotNull(message = ": O cpf não pode ser nulo")
+    @NotEmpty(message = ": O cpf não pode ser vazio")
+    @CPF(message = ": Cpf inválido")
     private String cpf;
 
-    @NotNull(message = "A senha não pode ser nulo")
-    @NotEmpty(message = "A senha não pode ser vazio")
+    @NotNull(message = ": A senha não pode ser nulo")
+    @NotEmpty(message = ": A senha não pode ser vazio")
     private String password;
 
     public EmployeeEntity toEntity(EmployeeRhEntity employeeProperties) {

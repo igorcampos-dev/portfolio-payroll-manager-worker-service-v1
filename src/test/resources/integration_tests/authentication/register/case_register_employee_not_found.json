@@ -3,7 +3,7 @@
   "steps": [
 
     {
-      "name": "login_ok",
+      "name": "employee_not_found",
       "url": "/tech-spring-solutions/v1/auth/register",
       "method": "POST",
       "request": {
