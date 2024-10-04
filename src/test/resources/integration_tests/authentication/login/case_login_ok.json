@@ -1,0 +1,29 @@
+{
+  "scenarioName": "Faz um teste básico no login",
+  "steps": [
+
+    {
+      "name": "login_ok",
+      "url": "/tech-spring-solutions/v1/auth/login",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "51927854059",
+          "password": "TEST1234567"
+        }
+      },
+      "verify": {
+        "status": 200,
+        "body": {
+          "id": "$NOT.NULL",
+          "paychecks": "$NOT.NULL",
+          "name": "$NOT.NULL",
+          "profession": "$NOT.NULL",
+          "token": "$NOT.NULL"
+        }
+      }
+
+    }
+
+  ]
+}

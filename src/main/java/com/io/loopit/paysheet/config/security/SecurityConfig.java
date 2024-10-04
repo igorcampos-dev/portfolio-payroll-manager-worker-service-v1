@@ -31,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(routesAuthentication::configureRoutes)
-                    .addFilterBefore(new Filter(jwtAuthentication) , UsernamePasswordAuthenticationFilter.class);
+                    .addFilterBefore(new Filter(jwtAuthentication, routesAuthentication) , UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 

@@ -1,0 +1,27 @@
+{
+  "scenarioName": "Faz um teste de registro",
+  "steps": [
+
+    {
+      "name": "login_ok",
+      "url": "/tech-spring-solutions/v1/auth/register",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "60512047090",
+          "password": "TEST1234567"
+        }
+      },
+      "verify": {
+        "status": 201,
+        "body": {
+          "name" : "$NOT.NULL",
+          "profession" : "$NOT.NULL",
+          "cpf" : "$NOT.NULL"
+        }
+      }
+
+    }
+
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz registro com credenciais vazias",
+  "steps": [
+
+    {
+      "name": "invalid_employee_empty",
+      "url": "/tech-spring-solutions/v1/auth/register",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "",
+          "password": ""
+        }
+      },
+      "verify": {
+        "status": 400,
+        "body": {
+          "timestamp" : "$NOT.NULL",
+          "status" : 400,
+          "message" : "$NOT.NULL",
+          "path" : "/tech-spring-solutions/v1/auth/register"
+        }
+      }
+
+    }
+
+  ]
+}

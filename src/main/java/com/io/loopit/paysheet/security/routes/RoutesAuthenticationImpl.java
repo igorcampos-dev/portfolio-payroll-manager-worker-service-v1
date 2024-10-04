@@ -4,7 +4,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -57,5 +60,14 @@ public class RoutesAuthenticationImpl implements RoutesAuthentication {
         routes.put("/v1/auth/register", HttpMethod.POST);
         return routes;
     }
+
+    @Override
+    public List<String> getAllPublicRoutes(){
+        List<String> publicRoutes = new ArrayList<>();
+        publicRoutes.addAll(getPublicRoutes().keySet());
+        publicRoutes.addAll(getDefaultPublicRoutes().keySet());
+        return publicRoutes;
+    }
+
 
 }

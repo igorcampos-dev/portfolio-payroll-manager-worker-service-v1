@@ -9,26 +9,26 @@ import java.util.regex.Pattern;
 
 public class ValidationUtils {
 
-    public static void validatePostAction(String userId, String paycheckDate, String contentType){
-        validateUUID(userId);
-        validateMonthYearFormat(paycheckDate);
+    public static void validatePostAction(String id, String date, String contentType){
+        validateUUID(id);
+        validateMonthYearFormat(date);
         validateContentType(contentType);
     }
 
-    public static void validatePutAction(String userId, String paycheckDate, String contentType){
-        validateUUID(userId);
-        validateMonthYearFormat(paycheckDate);
+    public static void validatePutAction(String id, String date, String contentType){
+        validateUUID(id);
+        validateMonthYearFormat(date);
         validateContentType(contentType);
     }
 
-    public static void validateDeleteAction(String userId, String paycheckDate){
-        validateUUID(userId);
-        validateMonthYearFormat(paycheckDate);
+    public static void validateDeleteAction(String id, String date){
+        validateUUID(id);
+        validateMonthYearFormat(date);
     }
 
-    public static void validateGetAction(String userId, String paycheckDate){
-        validateUUID(userId);
-        validateMonthYearFormat(paycheckDate);
+    public static void validateGetAction(String id, String date){
+        validateUUID(id);
+        validateMonthYearFormat(date);
     }
 
     public static void validateUuid(String uuid){
@@ -39,9 +39,9 @@ public class ValidationUtils {
         validatePass(password);
     }
 
-    private static void validateMonthYearFormat(String input) {
+    private static void validateMonthYearFormat(String date) {
         Matcher matcher = Pattern.compile("^(0[1-9]|1[0-2])-(19|20)\\d{2}$")
-                .matcher(input);
+                .matcher(date);
         if (!matcher.matches()) {
             throw new InvalidDataAccessApiUsageException("Data inválida. O formato correto é MM-AAAA.");
         }
@@ -60,9 +60,9 @@ public class ValidationUtils {
         }
     }
 
-    private static void validateUUID(String uuidString) {
+    private static void validateUUID(String uuid) {
         try {
-            UUID.fromString(uuidString);
+            UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Um campo fornecido não é um UUID válido.", e);
         }
