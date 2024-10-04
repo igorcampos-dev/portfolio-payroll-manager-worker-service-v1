@@ -2,6 +2,7 @@ package com.io.loopit.paysheet.security.filter;
 
 import com.io.loopit.paysheet.security.response.FilterResponseError;
 import com.io.loopit.paysheet.security.jwt.JwtAuthentication;
+import com.io.loopit.paysheet.security.routes.RoutesAuthentication;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 public class Filter extends OncePerRequestFilter {
 
     private final JwtAuthentication jwtAuthentication;
+    private final RoutesAuthentication routesAuthentication;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -41,7 +43,9 @@ public class Filter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        return request.getServletPath().contains("/v1/auth/");
+        String path = request.getServletPath();
+        return path.contains("/v1/auth/") ||
+               routesAuthentication.getAllPublicRoutes().contains(path);
     }
 
 }
