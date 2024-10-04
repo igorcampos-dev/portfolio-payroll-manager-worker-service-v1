@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz um registro com um usuário que não existe",
+  "steps": [
+
+    {
+      "name": "employee_not_found",
+      "url": "/tech-spring-solutions/v1/auth/register",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "09855602072",
+          "password": "TEST1234567"
+        }
+      },
+      "verify": {
+        "status": 404,
+        "body": {
+          "timestamp": "$NOT.NULL",
+          "status": 404,
+          "message": "Funcionário não encontrado na base de dados principal",
+          "path": "/tech-spring-solutions/v1/auth/register"
+        }
+      }
+
+    }
+
+  ]
+}

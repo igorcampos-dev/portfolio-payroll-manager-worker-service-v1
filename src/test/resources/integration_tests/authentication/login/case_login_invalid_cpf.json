@@ -1,0 +1,28 @@
+{
+  "scenarioName": "Faz login com um cpf inválido",
+  "steps": [
+
+    {
+      "name": "invalid_cpf",
+      "url": "/tech-spring-solutions/v1/auth/login",
+      "method": "POST",
+      "request": {
+        "body": {
+          "cpf": "00000000000",
+          "password": "TEST1234567"
+        }
+      },
+      "verify": {
+        "status": 400,
+        "body": {
+          "timestamp" : "$NOT.NULL",
+          "status" : 400,
+          "message" : "cpf : Cpf inválido",
+          "path" : "/tech-spring-solutions/v1/auth/login"
+        }
+      }
+
+    }
+
+  ]
+}

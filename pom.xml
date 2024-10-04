@@ -22,6 +22,7 @@
 		<nexus.aws.version>main-5f585d6e47-1</nexus.aws.version>
 		<mysql.connector.version>8.2.0</mysql.connector.version>
 		<springdoc.version>2.5.0</springdoc.version>
+		<zerocode.tdd.version>1.3.44</zerocode.tdd.version>
 	</properties>
 
 	<dependencies>
@@ -29,12 +30,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -93,6 +88,29 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
+
+		<!--  TESTS -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsmart</groupId>
+			<artifactId>zerocode-tdd</artifactId>
+			<version>${zerocode.tdd.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.3.232</version>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 
